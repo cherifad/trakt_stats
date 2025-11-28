@@ -1,20 +1,35 @@
+'use client';
+
 import type { Metadata } from "next";
 import "./globals.css";
-
-export const metadata: Metadata = {
-  title: "Trakt Stats",
-  description: "GUI for Trakt VIP Stats",
-};
+import { Navigation } from "@/components/Navigation";
+import { RequireUpload } from "@/components/RequireUpload";
+import { usePathname } from "next/navigation";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const pathname = usePathname();
+  const isWrappedPage = pathname === '/wrapped';
+  const isUploadPage = pathname === '/upload';
+
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className="antialiased">
-        {children}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <RequireUpload>
+            {!isWrappedPage && !isUploadPage && <Navigation />}
+            <main>{children}</main>
+          </RequireUpload>
+        </ThemeProvider>
       </body>
     </html>
   );
