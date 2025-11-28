@@ -151,6 +151,48 @@ npm run build
 npm start
 ```
 
+## 🐳 Docker
+
+### Build and Run with Docker
+
+```bash
+# Build the image
+docker build -t trakt-stats .
+
+# Run the container
+docker run -p 3000:3000 trakt-stats
+```
+
+### Using Docker Compose
+
+```bash
+# Start the application
+docker compose up -d
+
+# Stop the application
+docker compose down
+```
+
+### Pull from GitHub Container Registry
+
+```bash
+# Pull the latest image
+docker pull ghcr.io/cherifad/trakt_stats:latest
+
+# Run it
+docker run -p 3000:3000 ghcr.io/cherifad/trakt_stats:latest
+```
+
+## 🚀 CI/CD
+
+The project includes a GitHub Actions workflow that automatically:
+- ✅ Builds the Next.js application
+- 🐳 Creates Docker images for `linux/amd64` and `linux/arm64`
+- 📦 Pushes images to GitHub Container Registry
+- 🏷️ Tags images with branch names, version tags, and commit SHAs
+
+Images are available at: `ghcr.io/cherifad/trakt_stats`
+
 ## 🤝 Contributing
 
 Contributions are welcome! Feel free to:
