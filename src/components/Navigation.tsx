@@ -10,16 +10,20 @@ import {
   Clapperboard,
   Sparkles,
   Upload,
+  Menu,
+  X,
 } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { useTranslations } from "@/hooks/useTranslations";
 import { ThemeToggle } from "./ThemeToggle";
+import { useState } from "react";
 
 export function Navigation() {
   const pathname = usePathname();
   const t = useTranslations();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navigation = [
     { name: t("nav.dashboard"), href: "/", icon: Home },
@@ -52,12 +56,13 @@ export function Navigation() {
               >
                 <Film className="h-8 w-8 text-primary" />
               </motion.div>
-              <span className="ml-2 text-xl font-bold bg-gradient-to-r from-purple-700 via-purple-500 to-pink-600 bg-clip-text text-transparent drop-shadow-sm">
+              <span className="ml-2 text-xl font-bold bg-linear-to-r from-purple-700 via-purple-500 to-pink-600 bg-clip-text text-transparent drop-shadow-sm">
                 {t("nav.brandName")}
               </span>
             </Link>
           </motion.div>
 
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-3">
             <div className="flex items-baseline space-x-2">
               {navigation.map((item, index) => {
@@ -100,37 +105,61 @@ export function Navigation() {
             <ThemeToggle />
             <LanguageSwitcher />
           </div>
+
+          {/* Mobile Menu Button */}
+          <div className="flex md:hidden items-center gap-2">
+            <ThemeToggle />
+            <LanguageSwitcher />
+            <button
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-white/5 transition-all"
+              aria-label="Toggle menu"
+            >
+              {mobileMenuOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Mobile Navigation */}
-      <div className="md:hidden border-t border-white/10 dark:border-white/5">
-        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          <div className="flex justify-end gap-2 px-3 pb-2">
-            <ThemeToggle />
-            <LanguageSwitcher />
-          </div>
-          {navigation.map((item) => {
-            const isActive = pathname === item.href;
-            const Icon = item.icon;
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={cn(
-                  "relative block px-3 py-2 rounded-md text-base font-medium transition-all flex items-center gap-2",
-                  isActive
-                    ? "text-primary bg-primary/10"
-                    : "text-muted-foreground hover:text-foreground hover:bg-white/5"
-                )}
-              >
-                <Icon className="h-5 w-5" />
-                {item.name}
-              </Link>
-            );
-          })}
-        </div>
-      </div>
+      {/* Mobile Navigation Dropdown */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden border-t border-white/10 dark:border-white/5 overflow-hidden"
+          >
+            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+              {navigation.map((item) => {
+                const isActive = pathname === item.href;
+                const Icon = item.icon;
+                return (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={cn(
+                      "relative px-3 py-2 rounded-md text-base font-medium transition-all flex items-center gap-2",
+                      isActive
+                        ? "text-primary bg-primary/10"
+                        : "text-muted-foreground hover:text-foreground hover:bg-white/5"
+                    )}
+                  >
+                    <Icon className="h-5 w-5" />
+                    {item.name}
+                  </Link>
+                );
+              })}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.nav>
   );
 }

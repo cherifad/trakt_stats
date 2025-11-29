@@ -444,12 +444,12 @@ export default function UploadPage() {
                         {t("upload.step1Title")}
                       </p>
                       <a
-                        href="https://github.com/Ahmedazim7804/trakt_vip_stats"
+                        href="https://github.com/cherifad/trakt_stats/tree/develop/trakt_vip_stats"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-purple-500 hover:underline font-mono text-xs break-all"
                       >
-                        github.com/Ahmedazim7804/trakt_vip_stats
+                        github.com/cherifad/trakt_stats/trakt_vip_stats
                       </a>
                     </div>
                   </li>

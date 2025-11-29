@@ -160,7 +160,7 @@
     "primeTimeViewer": "Prime time viewer! 📺",
     "lateNightLegend": "Late night legend! 🌙",
     "theDedicationIsReal": "The dedication is real! 💪",
-    "yourUltimateBingeDay": "Your ultimate binge day:",
+    "yourUltimateBingeDay": "Your ultimate binge day",
     "beatingMondayBlues": "Beating the Monday blues! 💙",
     "humpDay": "Hump day? More like binge day! 🐫",
     "almostFriday": "Almost Friday feeling! 🎉",
@@ -220,6 +220,15 @@
     "Fri": "Fri",
     "Sat": "Sat",
     "Sun": "Sun"
+  },
+  "daysLong": {
+    "Mon": "Monday",
+    "Tue": "Tuesday",
+    "Wed": "Wednesday",
+    "Thu": "Thursday",
+    "Fri": "Friday",
+    "Sat": "Saturday",
+    "Sun": "Sunday"
   },
   "months": {
     "Jan": "January",

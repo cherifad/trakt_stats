@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# trakt_vip_stats is a separate repository
+trakt_vip_stats/

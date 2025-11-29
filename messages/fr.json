@@ -221,6 +221,15 @@
     "Sat": "Sam",
     "Sun": "Dim"
   },
+  "daysLong": {
+    "Mon": "Lundi",
+    "Tue": "Mardi",
+    "Wed": "Mercredi",
+    "Thu": "Jeudi",
+    "Fri": "Vendredi",
+    "Sat": "Samedi",
+    "Sun": "Dimanche"
+  },
   "months": {
     "Jan": "Janvier",
     "Feb": "Février",
