@@ -2,8 +2,9 @@
 
 import { Button } from "@/components/ui/button";
 import { Download, Share2, Copy, Check } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { useTranslations } from "@/hooks/useTranslations";
+import { toPng } from "html-to-image";
 
 interface ShareButtonsProps {
   title: string;
@@ -19,7 +20,11 @@ interface ShareButtonsProps {
     tvEpisodes?: number;
     movies?: number;
     topMovie?: string;
+    topMoviePoster?: string;
+    topMovieRuntime?: string;
     topShow?: string;
+    topShowPoster?: string;
+    topShowRuntime?: string;
   };
   slideType?: "summary" | "stats" | "top-content";
 }
@@ -34,40 +39,23 @@ export function ShareButtons({
   const t = useTranslations();
   const [copied, setCopied] = useState(false);
   const [generating, setGenerating] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   const formatNumber = (num: number): string => {
     return num.toLocaleString();
   };
 
-  const wrapText = (
-    ctx: CanvasRenderingContext2D,
-    text: string,
-    maxWidth: number
-  ): string[] => {
-    const words = text.split(" ");
-    const lines: string[] = [];
-    let currentLine = words[0];
-
-    for (let i = 1; i < words.length; i++) {
-      const word = words[i];
-      const width = ctx.measureText(currentLine + " " + word).width;
-      if (width < maxWidth) {
-        currentLine += " " + word;
-      } else {
-        lines.push(currentLine);
-        currentLine = word;
-      }
-    }
-    lines.push(currentLine);
-    return lines;
+  const formatRuntime = (runtime: string) => {
+    if (!runtime) return "";
+    if (runtime.toLowerCase().includes("m")) return runtime;
+    return `${runtime} min`;
   };
 
-  const shareText =
-    `🎬 My ${year} Trakt Wrapped:\n\n` +
-    `📺 ${stats.plays} titles watched\n` +
-    `⏱️ ${stats.hours} hours of content\n` +
-    `🎭 Favorite genre: ${stats.topGenre}\n\n` +
-    `#TraktWrapped #YearInReview`;
+  const shareText = t("share.shareText")
+    .replace("{year}", year.toString())
+    .replace("{plays}", stats.plays.toString())
+    .replace("{hours}", stats.hours.toString())
+    .replace("{genre}", stats.topGenre);
 
   const copyToClipboard = async () => {
     try {
@@ -80,289 +68,22 @@ export function ShareButtons({
   };
 
   const generateImage = async (): Promise<Blob | null> => {
+    if (!cardRef.current) return null;
     setGenerating(true);
     try {
-      const canvas = document.createElement("canvas");
-      canvas.width = 1080;
-      canvas.height = 1920;
-      const ctx = canvas.getContext("2d");
+      // Wait for fonts to load
+      await document.fonts.ready;
 
-      if (!ctx) {
-        console.error("Could not get canvas context");
-        return null;
-      }
-
-      // Create gradient background
-      const gradient = ctx.createLinearGradient(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-      );
-      gradient.addColorStop(0, "rgb(219, 39, 119)");
-      gradient.addColorStop(0.5, "rgb(147, 51, 234)");
-      gradient.addColorStop(1, "rgb(79, 70, 229)");
-      ctx.fillStyle = gradient;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      ctx.fillStyle = "white";
-      ctx.textAlign = "center";
-
-      // Generate different content based on slideType
-      if (slideType === "summary") {
-        // Enhanced summary with more stats
-        ctx.font = "bold 80px system-ui, -apple-system, sans-serif";
-        ctx.fillText(t("wrapped.thatsAWrap"), canvas.width / 2, 180);
-
-        ctx.font = "38px system-ui, -apple-system, sans-serif";
-        ctx.globalAlpha = 0.9;
-        ctx.fillText(
-          `🎬 ${username}'s ${year} Trakt Wrapped`,
-          canvas.width / 2,
-          260
-        );
-        ctx.globalAlpha = 1;
-
-        // Main stats in larger format
-        const mainStats = [
-          {
-            emoji: "📺",
-            value: formatNumber(stats.plays),
-            label: t("wrapped.totalPlays"),
-          },
-          {
-            emoji: "⏱️",
-            value: formatNumber(stats.hours),
-            label: t("wrapped.hoursWatched"),
-          },
-        ];
-
-        let yPos = 400;
-        mainStats.forEach((stat) => {
-          ctx.font = "60px system-ui, -apple-system, sans-serif";
-          ctx.globalAlpha = 0.9;
-          ctx.fillText(stat.emoji, canvas.width / 2 - 250, yPos);
-          ctx.globalAlpha = 1;
-
-          ctx.font = "bold 110px system-ui, -apple-system, sans-serif";
-          ctx.fillText(stat.value, canvas.width / 2 + 80, yPos);
-
-          ctx.font = "32px system-ui, -apple-system, sans-serif";
-          ctx.globalAlpha = 0.75;
-          ctx.fillText(stat.label, canvas.width / 2 + 80, yPos + 50);
-          ctx.globalAlpha = 1;
-
-          yPos += 200;
-        });
-
-        // Secondary stats grid
-        const secondaryStats = [
-          { value: stats.topGenre, label: t("wrapped.topGenre"), emoji: "🎭" },
-          {
-            value: stats.actorsCount.toString(),
-            label: t("wrapped.actorsSeen"),
-            emoji: "⭐",
-          },
-          {
-            value: stats.countriesCount.toString(),
-            label: t("wrapped.countriesLabel"),
-            emoji: "🌍",
-          },
-          {
-            value: stats.busiestMonth,
-            label: t("wrapped.busiestMonth"),
-            emoji: "📅",
-          },
-        ];
-
-        if (stats.tvEpisodes && stats.movies) {
-          secondaryStats.push(
-            {
-              value: formatNumber(stats.tvEpisodes),
-              label: t("wrapped.tvEpisodes"),
-              emoji: "📺",
-            },
-            {
-              value: formatNumber(stats.movies),
-              label: t("wrapped.movies"),
-              emoji: "🎬",
-            }
-          );
-        }
-
-        const gridStartY = 850;
-        const gridSpacing = 180;
-        const gridCols = 2;
-
-        secondaryStats.forEach((stat, index) => {
-          const row = Math.floor(index / gridCols);
-          const col = index % gridCols;
-          const x = col === 0 ? canvas.width / 3 : (canvas.width * 2) / 3;
-          const y = gridStartY + row * gridSpacing;
-
-          ctx.font = "40px system-ui, -apple-system, sans-serif";
-          ctx.fillText(stat.emoji, x, y - 30);
-
-          ctx.font = "bold 70px system-ui, -apple-system, sans-serif";
-          ctx.fillStyle = "white";
-          ctx.fillText(stat.value, x, y + 30);
-
-          ctx.font = "26px system-ui, -apple-system, sans-serif";
-          ctx.globalAlpha = 0.75;
-          ctx.fillText(stat.label, x, y + 65);
-          ctx.globalAlpha = 1;
-        });
-
-        // Footer
-        ctx.font = "32px system-ui, -apple-system, sans-serif";
-        ctx.globalAlpha = 0.8;
-        ctx.fillText(
-          "#TraktWrapped #YearInReview",
-          canvas.width / 2,
-          canvas.height - 80
-        );
-      } else if (
-        slideType === "top-content" &&
-        (stats.topMovie || stats.topShow)
-      ) {
-        // Top content slide
-        ctx.font = "bold 72px system-ui, -apple-system, sans-serif";
-        ctx.fillText(
-          t("wrapped.topContent") || "Top Content",
-          canvas.width / 2,
-          180
-        );
-
-        ctx.font = "36px system-ui, -apple-system, sans-serif";
-        ctx.globalAlpha = 0.9;
-        ctx.fillText(`${username} • ${year}`, canvas.width / 2, 250);
-        ctx.globalAlpha = 1;
-
-        let contentYPos = 450;
-
-        if (stats.topMovie) {
-          ctx.font = "48px system-ui, -apple-system, sans-serif";
-          ctx.fillText("🎬", canvas.width / 2, contentYPos);
-
-          ctx.font = "42px system-ui, -apple-system, sans-serif";
-          ctx.globalAlpha = 0.8;
-          ctx.fillText(
-            t("wrapped.topMovie") || "Top Movie",
-            canvas.width / 2,
-            contentYPos + 60
-          );
-          ctx.globalAlpha = 1;
-
-          ctx.font = "bold 58px system-ui, -apple-system, sans-serif";
-          const movieLines = wrapText(ctx, stats.topMovie, canvas.width - 200);
-          movieLines.forEach((line, idx) => {
-            ctx.fillText(line, canvas.width / 2, contentYPos + 140 + idx * 65);
-          });
-
-          contentYPos += 350;
-        }
-
-        if (stats.topShow) {
-          ctx.font = "48px system-ui, -apple-system, sans-serif";
-          ctx.fillText("📺", canvas.width / 2, contentYPos);
-
-          ctx.font = "42px system-ui, -apple-system, sans-serif";
-          ctx.globalAlpha = 0.8;
-          ctx.fillText(
-            t("wrapped.topShow") || "Top Show",
-            canvas.width / 2,
-            contentYPos + 60
-          );
-          ctx.globalAlpha = 1;
-
-          ctx.font = "bold 58px system-ui, -apple-system, sans-serif";
-          const showLines = wrapText(ctx, stats.topShow, canvas.width - 200);
-          showLines.forEach((line, idx) => {
-            ctx.fillText(line, canvas.width / 2, contentYPos + 140 + idx * 65);
-          });
-        }
-
-        // Footer
-        ctx.font = "32px system-ui, -apple-system, sans-serif";
-        ctx.globalAlpha = 0.8;
-        ctx.fillText("#TraktWrapped", canvas.width / 2, canvas.height - 80);
-      } else {
-        // Generic stats slide
-        ctx.font = "bold 72px system-ui, -apple-system, sans-serif";
-        ctx.fillText(title || t("wrapped.yourStats"), canvas.width / 2, 180);
-
-        ctx.font = "36px system-ui, -apple-system, sans-serif";
-        ctx.globalAlpha = 0.9;
-        ctx.fillText(`${username} • ${year}`, canvas.width / 2, 250);
-        ctx.globalAlpha = 1;
-
-        // Display available stats
-        const availableStats = [
-          stats.plays && {
-            emoji: "📺",
-            value: formatNumber(stats.plays),
-            label: t("wrapped.totalPlays"),
-          },
-          stats.hours && {
-            emoji: "⏱️",
-            value: formatNumber(stats.hours),
-            label: t("wrapped.hoursWatched"),
-          },
-          stats.topGenre && {
-            emoji: "🎭",
-            value: stats.topGenre,
-            label: t("wrapped.topGenre"),
-          },
-          stats.actorsCount && {
-            emoji: "⭐",
-            value: stats.actorsCount.toString(),
-            label: t("wrapped.actorsSeen"),
-          },
-          stats.countriesCount && {
-            emoji: "🌍",
-            value: stats.countriesCount.toString(),
-            label: t("wrapped.countriesLabel"),
-          },
-          stats.busiestMonth && {
-            emoji: "📅",
-            value: stats.busiestMonth,
-            label: t("wrapped.busiestMonth"),
-          },
-        ].filter(Boolean);
-
-        const startY = 450;
-        const spacing = 240;
-
-        availableStats.forEach((stat, index) => {
-          if (!stat) return;
-          const y = startY + index * spacing;
-
-          ctx.font = "56px system-ui, -apple-system, sans-serif";
-          ctx.fillText(stat.emoji, canvas.width / 2 - 280, y);
-
-          ctx.font = "bold 90px system-ui, -apple-system, sans-serif";
-          ctx.fillText(stat.value, canvas.width / 2 + 80, y);
-
-          ctx.font = "32px system-ui, -apple-system, sans-serif";
-          ctx.globalAlpha = 0.75;
-          ctx.fillText(stat.label, canvas.width / 2 + 80, y + 50);
-          ctx.globalAlpha = 1;
-        });
-
-        // Footer
-        ctx.font = "32px system-ui, -apple-system, sans-serif";
-        ctx.globalAlpha = 0.8;
-        ctx.fillText("#TraktWrapped", canvas.width / 2, canvas.height - 80);
-      }
-
-      ctx.globalAlpha = 1;
-
-      // Convert canvas to blob
-      return new Promise((resolve) => {
-        canvas.toBlob((blob) => {
-          resolve(blob);
-        }, "image/png");
+      const dataUrl = await toPng(cardRef.current, {
+        cacheBust: true,
+        pixelRatio: 1, // We are already sizing the div at 1080x1920
+        backgroundColor: "#020617", // Ensure background is set
+        fontEmbedCSS: "", // Disable font embedding to prevent "font is undefined" error
       });
+
+      // Convert dataURL to Blob
+      const res = await fetch(dataUrl);
+      return await res.blob();
     } catch (err) {
       console.error("Failed to generate image:", err);
       return null;
@@ -378,10 +99,10 @@ export function ShareButtons({
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    // Translatable filename
     const fileName = t("share.filename")
       .replace("{username}", username)
-      .replace("{year}", year.toString());
+      .replace("{year}", year.toString())
+      .concat(`-${slideType}`);
     a.download = `${fileName}.png`;
     document.body.appendChild(a);
     a.click();
@@ -396,7 +117,8 @@ export function ShareButtons({
     try {
       const fileName = t("share.filename")
         .replace("{username}", username)
-        .replace("{year}", year.toString());
+        .replace("{year}", year.toString())
+        .concat(`-${slideType}`);
       const file = new File([blob], `${fileName}.png`, {
         type: "image/png",
       });
@@ -408,51 +130,282 @@ export function ShareButtons({
           text: shareText,
         });
       } else {
-        // Fallback to download if sharing is not supported
-        await downloadImage();
+        alert(t("wrapped.shareNotSupported"));
       }
     } catch (err) {
       console.error("Error sharing image:", err);
-      // Fallback to download on error
-      await downloadImage();
+      alert(t("wrapped.shareNotSupported"));
     }
   };
 
   return (
-    <div className="flex flex-wrap gap-4 justify-center">
-      <Button
-        onClick={copyToClipboard}
-        variant="outline"
-        className="bg-white/10 text-white border-white/20 hover:bg-white/20"
-        disabled={generating}
-      >
-        {copied ? (
-          <Check className="w-4 h-4 mr-2" />
-        ) : (
-          <Copy className="w-4 h-4 mr-2" />
-        )}
-        {copied ? t("share.copied") : t("share.copyStats")}
-      </Button>
+    <>
+      <div className="flex flex-wrap gap-4 justify-center">
+        <Button
+          onClick={copyToClipboard}
+          variant="outline"
+          className="bg-white/10 text-white border-white/20 hover:bg-white/20"
+          disabled={generating}
+        >
+          {copied ? (
+            <Check className="w-4 h-4 mr-2" />
+          ) : (
+            <Copy className="w-4 h-4 mr-2" />
+          )}
+          {copied ? t("share.copied") : t("share.copyStats")}
+        </Button>
 
-      <Button
-        onClick={downloadImage}
-        variant="outline"
-        className="bg-white/10 text-white border-white/20 hover:bg-white/20"
-        disabled={generating}
-      >
-        <Download className="w-4 h-4 mr-2" />
-        {generating ? t("share.generating") : t("share.downloadImage")}
-      </Button>
+        <Button
+          onClick={downloadImage}
+          variant="outline"
+          className="bg-white/10 text-white border-white/20 hover:bg-white/20"
+          disabled={generating}
+        >
+          <Download className="w-4 h-4 mr-2" />
+          {generating ? t("share.generating") : t("share.downloadImage")}
+        </Button>
 
-      <Button
-        onClick={shareImage}
-        variant="outline"
-        className="bg-white/10 text-white border-white/20 hover:bg-white/20"
-        disabled={generating}
+        <Button
+          onClick={shareImage}
+          variant="outline"
+          className="bg-white/10 text-white border-white/20 hover:bg-white/20"
+          disabled={generating}
+        >
+          <Share2 className="w-4 h-4 mr-2" />
+          {t("share.shareImage")}
+        </Button>
+      </div>
+
+      {/* Hidden container for image generation */}
+      <div className="fixed left-[-9999px] top-0 overflow-hidden">
+        <div
+          ref={cardRef}
+          className="w-[1080px] h-[1920px] relative flex flex-col items-center justify-center p-16"
+          style={{
+            background: "linear-gradient(to bottom right, #0f172a, #020617)",
+            color: "#ffffff",
+          }}
+        >
+          {/* Background Blobs */}
+          <div
+            className="absolute top-0 right-0 w-[800px] h-[800px] rounded-full blur-[120px] translate-x-1/3 -translate-y-1/3"
+            style={{ backgroundColor: "rgba(124, 58, 237, 0.2)" }}
+          />
+          <div
+            className="absolute bottom-0 left-0 w-[600px] h-[600px] rounded-full blur-[100px] -translate-x-1/3 translate-y-1/3"
+            style={{ backgroundColor: "rgba(219, 39, 119, 0.2)" }}
+          />
+
+          {/* Card Content */}
+          <div className="relative z-10 w-full h-full flex flex-col items-center justify-between py-20">
+            {/* Header */}
+            <div className="text-center space-y-4">
+              <h1 className="text-[140px] font-bold leading-none tracking-tighter">
+                {year}
+              </h1>
+              <div
+                className="text-[50px] font-extrabold tracking-[0.2em]"
+                style={{ color: "rgba(255, 255, 255, 0.9)" }}
+              >
+                WRAPPED
+              </div>
+              <div
+                className="w-32 h-1 mx-auto my-8"
+                style={{ backgroundColor: "rgba(255, 255, 255, 0.2)" }}
+              />
+              <div
+                className="text-[40px] font-medium"
+                style={{ color: "#a78bfa" }}
+              >
+                @{username}
+              </div>
+            </div>
+
+            {/* Main Content based on slideType */}
+            <div className="flex-1 flex flex-col justify-center w-full max-w-[880px]">
+              {slideType === "summary" && (
+                <div className="grid grid-cols-2 gap-x-12 gap-y-20">
+                  <StatItem
+                    label={t("wrapped.totalPlays")}
+                    value={formatNumber(stats.plays)}
+                  />
+                  <StatItem
+                    label={t("wrapped.hoursWatched")}
+                    value={formatNumber(stats.hours)}
+                    accent
+                  />
+                  <StatItem
+                    label={t("wrapped.topGenre")}
+                    value={stats.topGenre}
+                  />
+                  <StatItem
+                    label={t("wrapped.busiestMonth")}
+                    value={stats.busiestMonth}
+                  />
+                  <StatItem
+                    label={t("wrapped.actorsSeen")}
+                    value={stats.actorsCount.toString()}
+                  />
+                  <StatItem
+                    label={t("wrapped.countriesLabel")}
+                    value={stats.countriesCount.toString()}
+                  />
+                </div>
+              )}
+
+              {slideType === "top-content" && (
+                <div className="flex justify-center items-start gap-12 w-full px-8">
+                  {stats.topMovie && (
+                    <div className="flex flex-col items-center space-y-6 w-1/2">
+                      <div
+                        className="text-[32px] font-semibold uppercase tracking-wider"
+                        style={{ color: "#f472b6" }}
+                      >
+                        {t("wrapped.topMovie")}
+                      </div>
+                      {stats.topMoviePoster ? (
+                        <div className="relative w-64 h-96 rounded-xl overflow-hidden shadow-2xl border-4 border-white/10">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={stats.topMoviePoster}
+                            alt={stats.topMovie}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      ) : null}
+                      <div className="text-[36px] font-bold leading-tight text-center line-clamp-2">
+                        {stats.topMovie}
+                      </div>
+                      {stats.topMovieRuntime && (
+                        <div className="text-[24px] font-medium opacity-75">
+                          {t("wrapped.runtime")}:{" "}
+                          {formatRuntime(stats.topMovieRuntime)}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                  {stats.topShow && (
+                    <div className="flex flex-col items-center space-y-6 w-1/2">
+                      <div
+                        className="text-[32px] font-semibold uppercase tracking-wider"
+                        style={{ color: "#a78bfa" }}
+                      >
+                        {t("wrapped.topShow")}
+                      </div>
+                      {stats.topShowPoster ? (
+                        <div className="relative w-64 h-96 rounded-xl overflow-hidden shadow-2xl border-4 border-white/10">
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={stats.topShowPoster}
+                            alt={stats.topShow}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      ) : null}
+                      <div className="text-[36px] font-bold leading-tight text-center line-clamp-2">
+                        {stats.topShow}
+                      </div>
+                      {stats.topShowRuntime && (
+                        <div className="text-[24px] font-medium opacity-75">
+                          {t("wrapped.runtime")}:{" "}
+                          {formatRuntime(stats.topShowRuntime)}
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {slideType === "stats" && (
+                <div className="space-y-16">
+                  <StatRow
+                    label={t("wrapped.totalPlays")}
+                    value={formatNumber(stats.plays)}
+                  />
+                  <StatRow
+                    label={t("wrapped.hoursWatched")}
+                    value={formatNumber(stats.hours)}
+                    accent
+                  />
+                  <StatRow
+                    label={t("wrapped.topGenre")}
+                    value={stats.topGenre}
+                  />
+                  <StatRow
+                    label={t("wrapped.actorsSeen")}
+                    value={stats.actorsCount.toString()}
+                  />
+                </div>
+              )}
+            </div>
+
+            {/* Footer */}
+            <div
+              className="text-[28px] font-semibold tracking-widest uppercase"
+              style={{ color: "rgba(255, 255, 255, 0.3)" }}
+            >
+              Trakt Stats
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+function StatItem({
+  label,
+  value,
+  accent = false,
+}: {
+  label: string;
+  value: string;
+  accent?: boolean;
+}) {
+  return (
+    <div className="flex flex-col gap-2">
+      <div
+        className="text-[32px] font-semibold uppercase tracking-wide"
+        style={{ color: "rgba(255, 255, 255, 0.5)" }}
       >
-        <Share2 className="w-4 h-4 mr-2" />
-        {t("share.shareImage")}
-      </Button>
+        {label}
+      </div>
+      <div
+        className="text-[72px] font-bold leading-none"
+        style={{ color: accent ? "#f472b6" : "#ffffff" }}
+      >
+        {value}
+      </div>
+    </div>
+  );
+}
+
+function StatRow({
+  label,
+  value,
+  accent = false,
+}: {
+  label: string;
+  value: string;
+  accent?: boolean;
+}) {
+  return (
+    <div
+      className="flex items-center justify-between pb-8"
+      style={{ borderBottom: "1px solid rgba(255, 255, 255, 0.1)" }}
+    >
+      <div
+        className="text-[40px] font-semibold uppercase tracking-wide"
+        style={{ color: "rgba(255, 255, 255, 0.5)" }}
+      >
+        {label}
+      </div>
+      <div
+        className="text-[80px] font-bold leading-none"
+        style={{ color: accent ? "#f472b6" : "#ffffff" }}
+      >
+        {value}
+      </div>
     </div>
   );
 }

@@ -68,6 +68,9 @@ export default function WrappedPage() {
     return acc;
   }, {} as Record<string, number>);
   const topGenre = Object.entries(topGenres).sort(([, a], [, b]) => b - a)[0];
+  const translatedGenre = topGenre?.[0]
+    ? t(`genres.${topGenre[0]}`)
+    : t("wrapped.defaultGenre");
 
   const topMovie = Object.entries(data.movies.users_top_10)[0];
   const topShow = Object.entries(data.tv.users_top_10)[0];
@@ -80,6 +83,9 @@ export default function WrappedPage() {
     },
     { month: "", count: 0 }
   );
+  const translatedMonth = mostActiveMonth.month
+    ? t(`months.${mostActiveMonth.month}`)
+    : mostActiveMonth.month;
 
   // Fun calculations
   const nightOwlHours = Object.entries(data.tv.plays.by_hour).reduce(
@@ -121,6 +127,12 @@ export default function WrappedPage() {
 
   const daysInCinema = Math.floor(totalHours / 24);
   const weeksInCinema = Math.floor(daysInCinema / 7);
+
+  const formatRuntime = (runtime: string) => {
+    if (!runtime) return "";
+    if (runtime.toLowerCase().includes("m")) return runtime;
+    return `${runtime} min`;
+  };
 
   const slides = [
     // Welcome Slide
@@ -221,7 +233,7 @@ export default function WrappedPage() {
             {t("wrapped.yourFavoriteGenre")}
           </p>
           <h1 className="text-7xl md:text-8xl font-bold mb-12">
-            {topGenre?.[0] || t("wrapped.defaultGenre")}
+            {translatedGenre}
           </h1>
           <p className="text-3xl opacity-75">
             {t("common.with")} {topGenre?.[1] || 0} {t("wrapped.titlesWatched")}
@@ -252,29 +264,8 @@ export default function WrappedPage() {
                 className="text-2xl text-center opacity-75 animate-fade-in-up"
                 style={{ animationDelay: "0.3s" }}
               >
-                {topMovie[1].runtime}
+                {t("wrapped.runtime")}: {formatRuntime(topMovie[1].runtime)}
               </p>
-              <div
-                className="mt-6 animate-fade-in-up"
-                style={{ animationDelay: "0.5s" }}
-              >
-                <ShareButtons
-                  title={t("wrapped.topMovie")}
-                  username={data.username}
-                  year={currentYear}
-                  stats={{
-                    plays: data.all_time_stats.plays,
-                    hours: totalHours,
-                    topGenre: topGenre?.[0] || t("wrapped.defaultGenre"),
-                    actorsCount: data.actors.length,
-                    countriesCount: Object.keys(data.tv.by_country).length,
-                    busiestMonth: mostActiveMonth.month,
-                    topMovie: topMovie[0],
-                    topShow: topShow?.[0],
-                  }}
-                  slideType="top-content"
-                />
-              </div>
             </div>
           )}
         </div>
@@ -299,9 +290,33 @@ export default function WrappedPage() {
                   className="object-cover"
                 />
               </div>
-              <p className="text-2xl text-center opacity-75">
-                {topShow[1].runtime}
+              <p className="text-2xl text-center opacity-75 mb-8">
+                {t("wrapped.runtime")}: {formatRuntime(topShow[1].runtime)}
               </p>
+              <ShareButtons
+                title={t("wrapped.topContent")}
+                username={data.username}
+                year={currentYear}
+                stats={{
+                  plays: data.all_time_stats.plays,
+                  hours: totalHours,
+                  topGenre: translatedGenre,
+                  actorsCount: data.actors.length,
+                  countriesCount: Object.keys(data.tv.by_country).length,
+                  busiestMonth: translatedMonth,
+                  topMovie: topMovie?.[0],
+                  topMoviePoster: topMovie
+                    ? getTMDBImageUrl(topMovie[1].poster)
+                    : undefined,
+                  topMovieRuntime: topMovie ? topMovie[1].runtime : undefined,
+                  topShow: topShow?.[0],
+                  topShowPoster: topShow
+                    ? getTMDBImageUrl(topShow[1].poster)
+                    : undefined,
+                  topShowRuntime: topShow ? topShow[1].runtime : undefined,
+                }}
+                slideType="top-content"
+              />
             </div>
           )}
         </div>
@@ -317,7 +332,7 @@ export default function WrappedPage() {
             {t("wrapped.yourBusiestMonth")}
           </p>
           <h1 className="text-7xl md:text-8xl font-bold mb-8">
-            {mostActiveMonth.month}
+            {translatedMonth}
           </h1>
           <p className="text-3xl opacity-75">
             {t("common.with")} {mostActiveMonth.count}{" "}
@@ -395,10 +410,10 @@ export default function WrappedPage() {
               stats={{
                 plays: data.all_time_stats.plays,
                 hours: totalHours,
-                topGenre: topGenre?.[0] || t("wrapped.defaultGenre"),
+                topGenre: translatedGenre,
                 actorsCount: data.actors.length,
                 countriesCount: Object.keys(data.tv.by_country).length,
-                busiestMonth: mostActiveMonth.month,
+                busiestMonth: translatedMonth,
                 tvEpisodes: data.tv.stats.plays.total,
                 movies: data.movies.stats.plays.total,
               }}
@@ -679,7 +694,7 @@ export default function WrappedPage() {
                 </p>
               </div>
               <div>
-                <p className="text-6xl font-bold">{topGenre?.[0]}</p>
+                <p className="text-6xl font-bold">{translatedGenre}</p>
                 <p className="text-xl opacity-75">{t("wrapped.topGenre")}</p>
               </div>
               <div>
@@ -695,7 +710,7 @@ export default function WrappedPage() {
                 </p>
               </div>
               <div>
-                <p className="text-6xl font-bold">{mostActiveMonth.month}</p>
+                <p className="text-6xl font-bold">{translatedMonth}</p>
                 <p className="text-xl opacity-75">
                   {t("wrapped.busiestMonth")}
                 </p>
@@ -719,10 +734,10 @@ export default function WrappedPage() {
               stats={{
                 plays: data.all_time_stats.plays,
                 hours: totalHours,
-                topGenre: topGenre?.[0] || t("wrapped.defaultGenre"),
+                topGenre: translatedGenre,
                 actorsCount: data.actors.length,
                 countriesCount: Object.keys(data.tv.by_country).length,
-                busiestMonth: mostActiveMonth.month,
+                busiestMonth: translatedMonth,
                 tvEpisodes: data.tv.stats.plays.total,
                 movies: data.movies.stats.plays.total,
                 topMovie: topMovie?.[0],
