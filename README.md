@@ -89,47 +89,43 @@ npm run dev
 
 ### 📁 Get Your Trakt Data
 
-#### Option 1: Use the Included Python Script (Recommended)
-
 This project includes an **enhanced version** of the Python script with **year-specific filtering** for accurate Wrapped statistics.
 
 1. Navigate to the Python script directory:
+
    ```bash
    cd trakt_vip_stats
    ```
 
 2. Install dependencies:
+
    ```bash
    pip install -r requirements.txt
    ```
 
 3. Create a `.env` file with your credentials:
+
    ```env
    username = "your_trakt_username"
    trakt_client_id = "your_trakt_client_id"
    trakt_client_secret = "your_trakt_client_secret"
    tmdb_api_key = "your_tmdb_api_key"
    ```
-   
+
    Get your credentials:
+
    - [Trakt Client ID & Secret](https://trakt.tv/oauth/applications)
    - [TMDB API Key](https://www.themoviedb.org/settings/api)
 
 4. Run the script:
+
    ```bash
    python main.py run --save
    ```
 
 5. The `all-time-stats.json` file will be generated - upload it to the web app!
 
-#### Option 2: Use Trakt's Official Export
-
-1. Log in to [trakt.tv](https://trakt.tv)
-2. Go to **Settings** → **Your Data** → **Export your data**
-3. Download the `all-time-stats.json` file
-4. Upload the file to the application
-
-> ⚠️ **Note**: The official Trakt export may not include year-specific filtering, which means your Wrapped statistics might show cumulative data across all years instead of just the current year.
+> 💡 **Note**: Trakt does not provide a built-in data export feature. You must use the Python script to generate your statistics file.
 
 ## 🛠️ Tech Stack
 
@@ -292,10 +288,12 @@ This repository includes an **improved version** of the [trakt_vip_stats](https:
 #### What's Different?
 
 The original script aggregates **all-time data**, which causes issues in the Wrapped feature. For example:
+
 - November would show 350 plays (cumulative across all years)
 - Instead of 29 plays (actual plays in November 2025)
 
 Our enhanced version adds optional `year` parameters to key functions:
+
 - `plays_by_time(year=2025)` - Get plays only for 2025
 - `users_top_10_watched_shows(year=2025)` - Top shows for 2025
 - `first_play(year=2025)` - First play of the year
