@@ -1,11 +1,20 @@
-'use client';
+"use client";
 
 import { getStatsData, formatNumber, getTMDBImageUrl } from "@/lib/data";
 import { StatCard } from "@/components/stats/StatCard";
 import { MediaCard } from "@/components/stats/MediaCard";
 import { ProgressBar } from "@/components/stats/ProgressBar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Play, Clock, Star, List, Film, Tv, Sparkles, TrendingUp } from "lucide-react";
+import {
+  Play,
+  Clock,
+  Star,
+  List,
+  Film,
+  Tv,
+  Sparkles,
+  TrendingUp,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -16,14 +25,14 @@ const container = {
   show: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.1
-    }
-  }
+      staggerChildren: 0.1,
+    },
+  },
 };
 
 const item = {
   hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 }
+  show: { opacity: 1, y: 0 },
 };
 
 export default function Home() {
@@ -35,7 +44,10 @@ export default function Home() {
     return null;
   }
 
-  const traktMovies = Object.entries(data.trakt.most_watched_movies).slice(0, 5);
+  const traktMovies = Object.entries(data.trakt.most_watched_movies).slice(
+    0,
+    5
+  );
   const traktShows = Object.entries(data.trakt.most_watched_shows).slice(0, 5);
 
   return (
@@ -62,43 +74,86 @@ export default function Home() {
               />
             </motion.div>
             <div className="text-white drop-shadow-lg">
-              <h1 className="text-4xl font-bold mb-2 text-shadow">{data.username}</h1>
+              <h1 className="text-4xl font-bold mb-2 text-shadow">
+                {data.username}
+              </h1>
               <p className="text-lg font-medium flex items-center gap-2">
                 <TrendingUp className="w-5 h-5" />
-                {t('dashboard.title')}
+                {t("dashboard.title")}
               </p>
             </div>
           </div>
-          <Link href="/wrapped">
-            <motion.div
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="bg-white/30 backdrop-blur-md hover:bg-white/40 px-8 py-4 rounded-2xl transition-all cursor-pointer flex items-center gap-3 shadow-lg border border-white/30"
-            >
-              <Sparkles className="w-6 h-6 text-yellow-400 animate-pulse drop-shadow-md" />
-              <span className="font-bold text-white text-lg drop-shadow-md">{t('dashboard.wrappedCta')}</span>
-            </motion.div>
-          </Link>
+          <div className="flex gap-4">
+            <Link href="/wrapped">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-white/30 backdrop-blur-md hover:bg-white/40 px-8 py-4 rounded-2xl transition-all cursor-pointer flex items-center gap-3 shadow-lg border border-white/30"
+              >
+                <Sparkles className="w-6 h-6 text-yellow-400 animate-pulse drop-shadow-md" />
+                <span className="font-bold text-white text-lg drop-shadow-md">
+                  {t("dashboard.wrappedCta")}
+                </span>
+              </motion.div>
+            </Link>
+            <Link href="/wrapped?summary=true">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-white/20 backdrop-blur-md hover:bg-white/30 px-6 py-4 rounded-2xl transition-all cursor-pointer flex items-center gap-3 shadow-lg border border-white/20"
+              >
+                <span className="font-semibold text-white drop-shadow-md">
+                  {t("dashboard.shareWrapped")}
+                </span>
+              </motion.div>
+            </Link>
+          </div>
         </div>
       </motion.div>
 
       {/* All Time Stats - Bento Grid */}
-      <motion.div
-        variants={container}
-        initial="hidden"
-        animate="show"
-      >
+      <motion.div variants={container} initial="hidden" animate="show">
         <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-700 to-pink-700 bg-clip-text text-transparent">
-          {t('dashboard.allTimeStats')}
+          {t("dashboard.allTimeStats")}
         </h2>
         <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
           {[
-            { title: t('dashboard.totalPlays'), value: data.all_time_stats.plays, icon: Play, gradient: "from-blue-500 to-cyan-500" },
-            { title: t('dashboard.hoursWatched'), value: data.all_time_stats.hours, icon: Clock, gradient: "from-purple-500 to-pink-500" },
-            { title: t('dashboard.collected'), value: data.all_time_stats.collected, icon: Film, gradient: "from-orange-500 to-red-500" },
-            { title: t('dashboard.ratings'), value: data.all_time_stats.ratings, icon: Star, gradient: "from-yellow-500 to-orange-500" },
-            { title: t('dashboard.lists'), value: data.all_time_stats.lists, icon: List, gradient: "from-green-500 to-emerald-500" },
-            { title: t('dashboard.comments'), value: data.all_time_stats.comments, icon: List, gradient: "from-indigo-500 to-purple-500" },
+            {
+              title: t("dashboard.totalPlays"),
+              value: data.all_time_stats.plays,
+              icon: Play,
+              gradient: "from-blue-500 to-cyan-500",
+            },
+            {
+              title: t("dashboard.hoursWatched"),
+              value: data.all_time_stats.hours,
+              icon: Clock,
+              gradient: "from-purple-500 to-pink-500",
+            },
+            {
+              title: t("dashboard.collected"),
+              value: data.all_time_stats.collected,
+              icon: Film,
+              gradient: "from-orange-500 to-red-500",
+            },
+            {
+              title: t("dashboard.ratings"),
+              value: data.all_time_stats.ratings,
+              icon: Star,
+              gradient: "from-yellow-500 to-orange-500",
+            },
+            {
+              title: t("dashboard.lists"),
+              value: data.all_time_stats.lists,
+              icon: List,
+              gradient: "from-green-500 to-emerald-500",
+            },
+            {
+              title: t("dashboard.comments"),
+              value: data.all_time_stats.comments,
+              icon: List,
+              gradient: "from-indigo-500 to-purple-500",
+            },
           ].map((stat, index) => (
             <motion.div key={stat.title} variants={item}>
               <StatCard
@@ -120,7 +175,9 @@ export default function Home() {
         <Card className="glass hover-lift overflow-hidden border-white/10 relative">
           <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 pointer-events-none" />
           <CardHeader className="relative">
-            <CardTitle className="text-2xl">{t('dashboard.firstPlay')}</CardTitle>
+            <CardTitle className="text-2xl">
+              {t("dashboard.firstPlay")}
+            </CardTitle>
           </CardHeader>
           <CardContent className="flex items-center gap-6 relative">
             {data.first_play.movie_logo && (
@@ -138,7 +195,9 @@ export default function Home() {
               </motion.div>
             )}
             <div>
-              <h3 className="text-3xl font-bold mb-2">{data.first_play.movie}</h3>
+              <h3 className="text-3xl font-bold mb-2">
+                {data.first_play.movie}
+              </h3>
               <p className="text-muted-foreground text-lg">
                 {data.first_play.date} at {data.first_play.time}
               </p>
@@ -159,26 +218,34 @@ export default function Home() {
             <Card className="glass overflow-hidden border-white/10 group hover-lift cursor-pointer relative">
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-blue-500/10 group-hover:from-blue-500/10 group-hover:to-blue-500/20 transition-all pointer-events-none" />
               <CardHeader className="flex flex-row items-center justify-between relative">
-                <CardTitle className="text-2xl">📺 {t('dashboard.tvShows')}</CardTitle>
+                <CardTitle className="text-2xl">
+                  📺 {t("dashboard.tvShows")}
+                </CardTitle>
                 <Tv className="h-8 w-8 text-blue-500 group-hover:scale-110 transition-transform" />
               </CardHeader>
               <CardContent className="space-y-4 relative">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="glass p-4 rounded-lg">
-                    <p className="text-sm text-muted-foreground mb-1">{t('dashboard.totalHours')}</p>
+                    <p className="text-sm text-muted-foreground mb-1">
+                      {t("dashboard.totalHours")}
+                    </p>
                     <p className="text-3xl font-bold bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">
                       {formatNumber(data.tv.stats.hours.total)}
                     </p>
                   </div>
                   <div className="glass p-4 rounded-lg">
-                    <p className="text-sm text-muted-foreground mb-1">{t('dashboard.episodes')}</p>
+                    <p className="text-sm text-muted-foreground mb-1">
+                      {t("dashboard.episodes")}
+                    </p>
                     <p className="text-3xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
                       {formatNumber(data.tv.stats.plays.total)}
                     </p>
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <p className="text-sm font-semibold text-muted-foreground">{t('dashboard.topGenres')}</p>
+                  <p className="text-sm font-semibold text-muted-foreground">
+                    {t("dashboard.topGenres")}
+                  </p>
                   {Object.entries(data.tv.by_genre)
                     .sort(([, a], [, b]) => b - a)
                     .slice(0, 3)
@@ -202,26 +269,34 @@ export default function Home() {
             <Card className="glass overflow-hidden border-white/10 group hover-lift cursor-pointer relative">
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 to-purple-500/10 group-hover:from-purple-500/10 group-hover:to-purple-500/20 transition-all pointer-events-none" />
               <CardHeader className="flex flex-row items-center justify-between relative">
-                <CardTitle className="text-2xl">🎬 {t('dashboard.movies')}</CardTitle>
+                <CardTitle className="text-2xl">
+                  🎬 {t("dashboard.movies")}
+                </CardTitle>
                 <Film className="h-8 w-8 text-purple-500 group-hover:scale-110 transition-transform" />
               </CardHeader>
               <CardContent className="space-y-4 relative">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="glass p-4 rounded-lg">
-                    <p className="text-sm text-muted-foreground mb-1">{t('dashboard.totalHours')}</p>
+                    <p className="text-sm text-muted-foreground mb-1">
+                      {t("dashboard.totalHours")}
+                    </p>
                     <p className="text-3xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
                       {formatNumber(data.movies.stats.hours.total)}
                     </p>
                   </div>
                   <div className="glass p-4 rounded-lg">
-                    <p className="text-sm text-muted-foreground mb-1">{t('dashboard.movies')}</p>
+                    <p className="text-sm text-muted-foreground mb-1">
+                      {t("dashboard.movies")}
+                    </p>
                     <p className="text-3xl font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
                       {formatNumber(data.movies.stats.plays.total)}
                     </p>
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <p className="text-sm font-semibold text-muted-foreground">{t('dashboard.topGenres')}</p>
+                  <p className="text-sm font-semibold text-muted-foreground">
+                    {t("dashboard.topGenres")}
+                  </p>
                   {Object.entries(data.movies.by_genre)
                     .sort(([, a], [, b]) => b - a)
                     .slice(0, 3)
@@ -251,7 +326,9 @@ export default function Home() {
         <motion.div variants={item}>
           <Card className="glass border-white/10">
             <CardHeader>
-              <CardTitle className="text-xl">{t('dashboard.traktMostWatchedMovies')}</CardTitle>
+              <CardTitle className="text-xl">
+                {t("dashboard.traktMostWatchedMovies")}
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
@@ -267,11 +344,15 @@ export default function Home() {
                       </span>
                       <div>
                         <p className="font-semibold">{movie.title}</p>
-                        <p className="text-sm text-muted-foreground">{movie.play_count}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {movie.play_count}
+                        </p>
                       </div>
                     </div>
                     {movie.watched && (
-                      <span className="text-green-500 text-sm font-semibold">✓ {t('dashboard.watched')}</span>
+                      <span className="text-green-500 text-sm font-semibold">
+                        ✓ {t("dashboard.watched")}
+                      </span>
                     )}
                   </motion.div>
                 ))}
@@ -283,7 +364,9 @@ export default function Home() {
         <motion.div variants={item}>
           <Card className="glass border-white/10">
             <CardHeader>
-              <CardTitle className="text-xl">{t('dashboard.traktMostWatchedShows')}</CardTitle>
+              <CardTitle className="text-xl">
+                {t("dashboard.traktMostWatchedShows")}
+              </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-2">
@@ -299,11 +382,15 @@ export default function Home() {
                       </span>
                       <div>
                         <p className="font-semibold">{show.title}</p>
-                        <p className="text-sm text-muted-foreground">{show.play_count}</p>
+                        <p className="text-sm text-muted-foreground">
+                          {show.play_count}
+                        </p>
                       </div>
                     </div>
                     {show.watched && (
-                      <span className="text-green-500 text-sm font-semibold">✓ {t('dashboard.watched')}</span>
+                      <span className="text-green-500 text-sm font-semibold">
+                        ✓ {t("dashboard.watched")}
+                      </span>
                     )}
                   </motion.div>
                 ))}
@@ -322,13 +409,15 @@ export default function Home() {
       >
         <motion.div variants={item}>
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold">{t('dashboard.yourTopTvShows')}</h2>
-            <Link href="/tv" className="text-primary hover:underline font-medium flex items-center gap-1 group text-sm whitespace-nowrap">
-              {t('dashboard.viewAll')}
-              <motion.span
-                initial={{ x: 0 }}
-                whileHover={{ x: 4 }}
-              >
+            <h2 className="text-2xl font-bold">
+              {t("dashboard.yourTopTvShows")}
+            </h2>
+            <Link
+              href="/tv"
+              className="text-primary hover:underline font-medium flex items-center gap-1 group text-sm whitespace-nowrap"
+            >
+              {t("dashboard.viewAll")}
+              <motion.span initial={{ x: 0 }} whileHover={{ x: 4 }}>
                 →
               </motion.span>
             </Link>
@@ -342,10 +431,7 @@ export default function Home() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <MediaCard
-                    poster={show.poster}
-                    runtime={show.runtime}
-                  />
+                  <MediaCard poster={show.poster} runtime={show.runtime} />
                 </motion.div>
               ))}
           </div>
@@ -353,13 +439,15 @@ export default function Home() {
 
         <motion.div variants={item}>
           <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold">{t('dashboard.yourTopMovies')}</h2>
-            <Link href="/movies" className="text-primary hover:underline font-medium flex items-center gap-1 group text-sm whitespace-nowrap">
-              {t('dashboard.viewAll')}
-              <motion.span
-                initial={{ x: 0 }}
-                whileHover={{ x: 4 }}
-              >
+            <h2 className="text-2xl font-bold">
+              {t("dashboard.yourTopMovies")}
+            </h2>
+            <Link
+              href="/movies"
+              className="text-primary hover:underline font-medium flex items-center gap-1 group text-sm whitespace-nowrap"
+            >
+              {t("dashboard.viewAll")}
+              <motion.span initial={{ x: 0 }} whileHover={{ x: 4 }}>
                 →
               </motion.span>
             </Link>
@@ -373,10 +461,7 @@ export default function Home() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <MediaCard
-                    poster={movie.poster}
-                    runtime={movie.runtime}
-                  />
+                  <MediaCard poster={movie.poster} runtime={movie.runtime} />
                 </motion.div>
               ))}
           </div>
