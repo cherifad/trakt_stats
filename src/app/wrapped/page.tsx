@@ -58,7 +58,7 @@ export default function WrappedPage() {
   if (!data) return null;
 
   // Calculate insights
-  const currentYear = 2024; // You can make this dynamic
+  const currentYear = new Date().getFullYear();
   const totalHours = data.all_time_stats.hours;
   const topGenres = Object.entries({
     ...data.tv.by_genre,
