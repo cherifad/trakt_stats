@@ -137,6 +137,15 @@ The application supports French and English. Translations are located in:
 - `messages/fr.json` - French translations
 - `messages/en.json` - English translations
 
+## 🌐 Language in the URL
+
+This app supports switching languages without a full page reload. Use the `lang` query parameter to force French when needed:
+
+- English (default): no `lang` parameter in the URL
+- French: `?lang=fr`
+
+Components and pages will update the URL and localStorage when you change language so your preference persists across navigation.
+
 ## 🔒 Data & Privacy
 
 - All data is stored **locally** in your browser (localStorage)
@@ -215,3 +224,15 @@ See the [LICENSE](LICENSE) file for more details.
 ---
 
 Made with ❤️ for movie and TV show enthusiasts
+
+## 📎 Python scripts (optional)
+
+This repository includes an optional Python helper package located in the `trakt_vip_stats/` folder. It contains scripts to fetch and parse Trakt data and can be used standalone if you prefer using Python for data collection or preprocessing.
+
+Quick pointers:
+
+- `trakt_vip_stats/main.py` — entry point for the Python utilities
+- `trakt_vip_stats/get_data/` — modules to fetch history, ratings and lists
+- `trakt_vip_stats/parseData/` — parsing helpers used to generate `all-time-stats.json`
+
+You do not need Python to run the web app; the web UI consumes the exported `all-time-stats.json` file via the upload page.
