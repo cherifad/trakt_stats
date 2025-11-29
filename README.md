@@ -87,12 +87,49 @@ npm run dev
 
 4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-### 📁 Get Your Trakt File
+### 📁 Get Your Trakt Data
+
+#### Option 1: Use the Included Python Script (Recommended)
+
+This project includes an **enhanced version** of the Python script with **year-specific filtering** for accurate Wrapped statistics.
+
+1. Navigate to the Python script directory:
+   ```bash
+   cd trakt_vip_stats
+   ```
+
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Create a `.env` file with your credentials:
+   ```env
+   username = "your_trakt_username"
+   trakt_client_id = "your_trakt_client_id"
+   trakt_client_secret = "your_trakt_client_secret"
+   tmdb_api_key = "your_tmdb_api_key"
+   ```
+   
+   Get your credentials:
+   - [Trakt Client ID & Secret](https://trakt.tv/oauth/applications)
+   - [TMDB API Key](https://www.themoviedb.org/settings/api)
+
+4. Run the script:
+   ```bash
+   python main.py run --save
+   ```
+
+5. The `all-time-stats.json` file will be generated - upload it to the web app!
+
+#### Option 2: Use Trakt's Official Export
 
 1. Log in to [trakt.tv](https://trakt.tv)
 2. Go to **Settings** → **Your Data** → **Export your data**
 3. Download the `all-time-stats.json` file
 4. Upload the file to the application
+
+> ⚠️ **Note**: The official Trakt export may not include year-specific filtering, which means your Wrapped statistics might show cumulative data across all years instead of just the current year.
 
 ## 🛠️ Tech Stack
 
@@ -226,7 +263,7 @@ Contributions are welcome! Feel free to:
 
 ## 🙏 Acknowledgments
 
-- [trakt_vip_stats](https://github.com/Ahmedazim7804/trakt_vip_stats) for the Python backend
+- [trakt_vip_stats](https://github.com/Ahmedazim7804/trakt_vip_stats) by [@Ahmedazim7804](https://github.com/Ahmedazim7804) for the original Python backend (enhanced with year filtering in this fork)
 - [Trakt.tv](https://trakt.tv) for the API and data
 - [TMDB](https://www.themoviedb.org) for images and metadata
 
@@ -238,14 +275,45 @@ See the [LICENSE](LICENSE) file for more details.
 
 Made with ❤️ for movie and TV show enthusiasts
 
-## 📎 Python scripts (optional)
+## 📎 Python Scripts
 
-This repository includes an optional Python helper package located in the `trakt_vip_stats/` folder. It contains scripts to fetch and parse Trakt data and can be used standalone if you prefer using Python for data collection or preprocessing.
+### Enhanced Year Filtering 🎯
 
-Quick pointers:
+This repository includes an **improved version** of the [trakt_vip_stats](https://github.com/Ahmedazim7804/trakt_vip_stats) Python script with additional features:
 
-- `trakt_vip_stats/main.py` — entry point for the Python utilities
-- `trakt_vip_stats/get_data/` — modules to fetch history, ratings and lists
-- `trakt_vip_stats/parseData/` — parsing helpers used to generate `all-time-stats.json`
+#### Key Improvements:
 
-You do not need Python to run the web app; the web UI consumes the exported `all-time-stats.json` file via the upload page.
+- ✅ **Year-specific filtering** for accurate Wrapped statistics
+- ✅ Separate data for current year vs all-time stats
+- ✅ Fixed cumulative vs year-specific play counts
+- ✅ Accurate "first play of the year" tracking
+- ✅ Top 10 movies/shows filtered by year
+
+#### What's Different?
+
+The original script aggregates **all-time data**, which causes issues in the Wrapped feature. For example:
+- November would show 350 plays (cumulative across all years)
+- Instead of 29 plays (actual plays in November 2025)
+
+Our enhanced version adds optional `year` parameters to key functions:
+- `plays_by_time(year=2025)` - Get plays only for 2025
+- `users_top_10_watched_shows(year=2025)` - Top shows for 2025
+- `first_play(year=2025)` - First play of the year
+
+#### Structure:
+
+- `trakt_vip_stats/main.py` — Entry point for data collection
+- `trakt_vip_stats/get_data/` — Modules to fetch history, ratings, and lists from Trakt API
+- `trakt_vip_stats/parseData/` — **Enhanced** parsing helpers with year filtering
+- `trakt_vip_stats/save.py` — Generates `all-time-stats.json` with both all-time AND year-specific data
+
+#### Usage:
+
+```bash
+cd trakt_vip_stats
+python main.py run --save  # Generates enhanced all-time-stats.json
+```
+
+See [trakt_vip_stats/README.md](trakt_vip_stats/README.md) for detailed documentation.
+
+> 💡 **Note**: You don't need Python to run the web app if you already have an `all-time-stats.json` file. However, for the best Wrapped experience with accurate year-specific statistics, we recommend using our enhanced Python script.
