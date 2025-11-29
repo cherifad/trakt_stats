@@ -57,8 +57,21 @@ export default function WrappedPage() {
 
   if (!data) return null;
 
-  // Calculate insights
+  // Calculate insights for current year only
   const currentYear = new Date().getFullYear();
+  
+  // Filter data by current year
+  const currentYearTvPlays = data.tv.plays.by_year[currentYear] || 0;
+  const currentYearMoviePlays = data.movies.plays.by_year[currentYear] || 0;
+  const totalPlaysThisYear = currentYearTvPlays + currentYearMoviePlays;
+  
+  // Calculate hours for current year (estimate based on ratio)
+  const totalAllTimePlays = data.all_time_stats.plays;
+  const currentYearRatio = totalPlaysThisYear / (totalAllTimePlays || 1);
+  const totalHoursThisYear = Math.round(data.all_time_stats.hours * currentYearRatio);
+  
+  // For simplicity, keep using all-time data for genres, actors, etc.
+  // In a real scenario, you'd need year-filtered data from the backend
   const totalHours = data.all_time_stats.hours;
   const topGenres = Object.entries({
     ...data.tv.by_genre,
@@ -183,7 +196,7 @@ export default function WrappedPage() {
             {t("wrapped.youWatched")}
           </p>
           <h1 className="text-8xl md:text-9xl font-bold mb-8 animate-scale-in">
-            {formatNumber(data.all_time_stats.plays)}
+            {formatNumber(totalPlaysThisYear)}
           </h1>
           <p
             className="text-4xl font-semibold animate-fade-in-up"
@@ -195,7 +208,7 @@ export default function WrappedPage() {
             className="text-2xl mt-8 opacity-75 animate-fade-in-up"
             style={{ animationDelay: "0.5s" }}
           >
-            {(data.all_time_stats.plays / 365).toFixed(1)} {t("wrapped.perDay")}
+            {(totalPlaysThisYear / 365).toFixed(1)} {t("wrapped.perDay")}
             !
           </p>
         </div>
@@ -209,7 +222,7 @@ export default function WrappedPage() {
         <div className="flex flex-col items-center justify-center h-full text-center text-white">
           <p className="text-3xl mb-8 opacity-90">{t("wrapped.youSpent")}</p>
           <h1 className="text-8xl md:text-9xl font-bold mb-8">
-            {formatNumber(totalHours)}
+            {formatNumber(totalHoursThisYear)}
           </h1>
           <p className="text-4xl font-semibold mb-4">
             {t("wrapped.hoursWatching")}
@@ -217,7 +230,7 @@ export default function WrappedPage() {
           <p className="text-2xl opacity-75">
             {t("wrapped.daysWorthOfContent").replace(
               "{days}",
-              Math.floor(totalHours / 24).toString()
+              Math.floor(totalHoursThisYear / 24).toString()
             )}
           </p>
         </div>
@@ -298,8 +311,8 @@ export default function WrappedPage() {
                 username={data.username}
                 year={currentYear}
                 stats={{
-                  plays: data.all_time_stats.plays,
-                  hours: totalHours,
+                  plays: totalPlaysThisYear,
+                  hours: totalHoursThisYear,
                   topGenre: translatedGenre,
                   actorsCount: data.actors.length,
                   countriesCount: Object.keys(data.tv.by_country).length,
@@ -386,19 +399,19 @@ export default function WrappedPage() {
           <div className="grid grid-cols-2 gap-16 mb-8">
             <div>
               <h2 className="text-6xl font-bold mb-4">
-                {formatNumber(data.tv.stats.plays.total)}
+                {formatNumber(currentYearTvPlays)}
               </h2>
               <p className="text-3xl">{t("wrapped.tvEpisodes")}</p>
             </div>
             <div>
               <h2 className="text-6xl font-bold mb-4">
-                {formatNumber(data.movies.stats.plays.total)}
+                {formatNumber(currentYearMoviePlays)}
               </h2>
               <p className="text-3xl">{t("wrapped.movies")}</p>
             </div>
           </div>
           <p className="text-2xl opacity-75 mt-8">
-            {data.tv.stats.plays.total > data.movies.stats.plays.total
+            {currentYearTvPlays > currentYearMoviePlays
               ? t("wrapped.youreATvPerson")
               : t("wrapped.youreAMoviePerson")}
           </p>
@@ -408,14 +421,14 @@ export default function WrappedPage() {
               username={data.username}
               year={currentYear}
               stats={{
-                plays: data.all_time_stats.plays,
-                hours: totalHours,
+                plays: totalPlaysThisYear,
+                hours: totalHoursThisYear,
                 topGenre: translatedGenre,
                 actorsCount: data.actors.length,
                 countriesCount: Object.keys(data.tv.by_country).length,
                 busiestMonth: translatedMonth,
-                tvEpisodes: data.tv.stats.plays.total,
-                movies: data.movies.stats.plays.total,
+                tvEpisodes: currentYearTvPlays,
+                movies: currentYearMoviePlays,
               }}
               slideType="stats"
             />
@@ -683,12 +696,12 @@ export default function WrappedPage() {
             <div className="grid grid-cols-2 md:grid-cols-3 gap-8 mb-8 text-left animate-scale-in">
               <div>
                 <p className="text-6xl font-bold">
-                  {formatNumber(data.all_time_stats.plays)}
+                  {formatNumber(totalPlaysThisYear)}
                 </p>
                 <p className="text-xl opacity-75">{t("wrapped.totalPlays")}</p>
               </div>
               <div>
-                <p className="text-6xl font-bold">{formatNumber(totalHours)}</p>
+                <p className="text-6xl font-bold">{formatNumber(totalHoursThisYear)}</p>
                 <p className="text-xl opacity-75">
                   {t("wrapped.hoursWatched")}
                 </p>
@@ -732,14 +745,14 @@ export default function WrappedPage() {
               username={data.username}
               year={currentYear}
               stats={{
-                plays: data.all_time_stats.plays,
-                hours: totalHours,
+                plays: totalPlaysThisYear,
+                hours: totalHoursThisYear,
                 topGenre: translatedGenre,
                 actorsCount: data.actors.length,
                 countriesCount: Object.keys(data.tv.by_country).length,
                 busiestMonth: translatedMonth,
-                tvEpisodes: data.tv.stats.plays.total,
-                movies: data.movies.stats.plays.total,
+                tvEpisodes: currentYearTvPlays,
+                movies: currentYearMoviePlays,
                 topMovie: topMovie?.[0],
                 topShow: topShow?.[0],
               }}
