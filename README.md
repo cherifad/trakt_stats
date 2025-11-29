@@ -10,6 +10,7 @@ An interactive web application to visualize and analyze your Trakt viewing stati
 ## ✨ Features
 
 ### 📊 Main Dashboard
+
 - Overview of all your viewing statistics
 - Global stats: movies watched, TV shows followed, hours spent
 - Top 10 favorite movies and shows
@@ -17,6 +18,7 @@ An interactive web application to visualize and analyze your Trakt viewing stati
 - Distribution by genre, country, and decade
 
 ### 🎥 Movies Page
+
 - Detailed statistics on your watched movies
 - Top 10 most-watched movies
 - Analysis by genre, year, month, and country
@@ -24,6 +26,7 @@ An interactive web application to visualize and analyze your Trakt viewing stati
 - Viewing trends over time
 
 ### 📺 TV Shows Page
+
 - Complete statistics on your TV shows
 - Top 10 favorite series
 - Analysis by genre, network, and country
@@ -31,12 +34,14 @@ An interactive web application to visualize and analyze your Trakt viewing stati
 - Binge-watching statistics
 
 ### 🎭 Actors & Directors
+
 - Top actors with number of appearances
 - Favorite directors
 - Associated movies and shows
 - Photos and detailed information
 
 ### 🎉 Annual Wrapped
+
 - Animated recap of your year (Spotify Wrapped style)
 - 17 interactive slides with smooth animations
 - Fun stats: night owl vs early bird, favorite binge day
@@ -44,6 +49,7 @@ An interactive web application to visualize and analyze your Trakt viewing stati
 - Social media sharing
 
 ### 🌓 Additional Features
+
 - **Dark mode** with automatic system detection
 - **Multilingual support** (French and English)
 - **Responsive design** for mobile, tablet, and desktop
@@ -54,23 +60,27 @@ An interactive web application to visualize and analyze your Trakt viewing stati
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js 18+ 
+
+- Node.js 18+
 - npm or yarn
 
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/cherifad/trakt_stats.git
 cd trakt_stats
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
 3. Start the development server:
+
 ```bash
 npm run dev
 ```
@@ -134,6 +144,7 @@ Colors and styles are configurable in `src/app/globals.css` using CSS variables.
 ## 🌍 Internationalization
 
 The application supports French and English. Translations are located in:
+
 - `messages/fr.json` - French translations
 - `messages/en.json` - English translations
 
@@ -195,6 +206,7 @@ docker run -p 3000:3000 ghcr.io/cherifad/trakt_stats:latest
 ## 🚀 CI/CD
 
 The project includes a GitHub Actions workflow that automatically:
+
 - ✅ Builds the Next.js application
 - 🐳 Creates Docker images for `linux/amd64` and `linux/arm64`
 - 📦 Pushes images to GitHub Container Registry
@@ -205,6 +217,7 @@ Images are available at: `ghcr.io/cherifad/trakt_stats`
 ## 🤝 Contributing
 
 Contributions are welcome! Feel free to:
+
 1. Fork the project
 2. Create a branch (`git checkout -b feature/AmazingFeature`)
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
