@@ -199,7 +199,9 @@
     "topContent": "Top Content",
     "topMovie": "Top Movie",
     "topShow": "Top Show",
-    "yourStats": "Your Stats"
+    "yourStats": "Your Stats",
+    "runtime": "Runtime",
+    "shareNotSupported": "Sharing is not supported on this device"
   },
   "common": {
     "with": "with",
@@ -219,6 +221,46 @@
     "Sat": "Sat",
     "Sun": "Sun"
   },
+  "months": {
+    "Jan": "January",
+    "Feb": "February",
+    "Mar": "March",
+    "Apr": "April",
+    "May": "May",
+    "Jun": "June",
+    "Jul": "July",
+    "Aug": "August",
+    "Sep": "September",
+    "Oct": "October",
+    "Nov": "November",
+    "Dec": "December"
+  },
+  "genres": {
+    "Action": "Action",
+    "Adventure": "Adventure",
+    "Animation": "Animation",
+    "Comedy": "Comedy",
+    "Crime": "Crime",
+    "Documentary": "Documentary",
+    "Drama": "Drama",
+    "Family": "Family",
+    "Fantasy": "Fantasy",
+    "History": "History",
+    "Horror": "Horror",
+    "Music": "Music",
+    "Mystery": "Mystery",
+    "Romance": "Romance",
+    "Science Fiction": "Science Fiction",
+    "TV Movie": "TV Movie",
+    "Thriller": "Thriller",
+    "War": "War",
+    "Western": "Western",
+    "Reality": "Reality",
+    "Soap": "Soap",
+    "News": "News",
+    "Talk": "Talk",
+    "Politics": "Politics"
+  },
   "share": {
     "copyStats": "Copy Stats",
     "copied": "Copied!",
@@ -226,7 +268,8 @@
     "downloadImage": "Download Image",
     "shareImage": "Share Image",
     "generating": "Generating...",
-    "filename": "{username}-wrapped-{year}"
+    "filename": "{username}-wrapped-{year}",
+    "shareText": "🎬 My {year} Trakt Wrapped:\n\n📺 {plays} titles watched\n⏱️ {hours} hours of content\n🎭 Favorite genre: {genre}\n\n#TraktWrapped #YearInReview"
   },
   "upload": {
     "title": "Trakt Stats",
@@ -261,5 +304,11 @@
     "step3Title": "Run the script",
     "step4Title": "Upload the generated all-time-stats.json file here ⬆️",
     "infoNote": "💡 The file contains all your Trakt data without needing Trakt VIP"
+  },
+  "notFound": {
+    "title": "Lost in the credits?",
+    "description": "The scene you're looking for has been cut from the final release. Let's get you back to the main feature.",
+    "backToDashboard": "Back to Dashboard",
+    "errorCode": "Error Code: SCENE_MISSING"
   }
 }

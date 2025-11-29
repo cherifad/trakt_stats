@@ -199,7 +199,9 @@
     "topContent": "Meilleurs contenus",
     "topMovie": "Meilleur film",
     "topShow": "Meilleure série",
-    "yourStats": "Tes stats"
+    "yourStats": "Tes stats",
+    "runtime": "Durée",
+    "shareNotSupported": "Le partage n'est pas supporté sur cet appareil"
   },
   "common": {
     "with": "avec",
@@ -219,6 +221,46 @@
     "Sat": "Sam",
     "Sun": "Dim"
   },
+  "months": {
+    "Jan": "Janvier",
+    "Feb": "Février",
+    "Mar": "Mars",
+    "Apr": "Avril",
+    "May": "Mai",
+    "Jun": "Juin",
+    "Jul": "Juillet",
+    "Aug": "Août",
+    "Sep": "Septembre",
+    "Oct": "Octobre",
+    "Nov": "Novembre",
+    "Dec": "Décembre"
+  },
+  "genres": {
+    "Action": "Action",
+    "Adventure": "Aventure",
+    "Animation": "Animation",
+    "Comedy": "Comédie",
+    "Crime": "Crime",
+    "Documentary": "Documentaire",
+    "Drama": "Drame",
+    "Family": "Famille",
+    "Fantasy": "Fantastique",
+    "History": "Histoire",
+    "Horror": "Horreur",
+    "Music": "Musique",
+    "Mystery": "Mystère",
+    "Romance": "Romance",
+    "Science Fiction": "Science-Fiction",
+    "TV Movie": "Téléfilm",
+    "Thriller": "Thriller",
+    "War": "Guerre",
+    "Western": "Western",
+    "Reality": "Téléréalité",
+    "Soap": "Soap",
+    "News": "Actualités",
+    "Talk": "Talk-show",
+    "Politics": "Politique"
+  },
   "share": {
     "copyStats": "Copier les stats",
     "copied": "Copié !",
@@ -226,7 +268,8 @@
     "downloadImage": "Télécharger l'image",
     "shareImage": "Partager l'image",
     "generating": "Génération...",
-    "filename": "{username}-recap-{year}"
+    "filename": "{username}-recap-{year}",
+    "shareText": "🎬 Mon Trakt Wrapped {year} :\n\n📺 {plays} titres regardés\n⏱️ {hours} heures de contenu\n🎭 Genre favori : {genre}\n\n#TraktWrapped #YearInReview"
   },
   "upload": {
     "title": "Trakt Stats",
@@ -261,5 +304,11 @@
     "step3Title": "Lance le script",
     "step4Title": "Importe le fichier all-time-stats.json généré ici ⬆️",
     "infoNote": "💡 Le fichier contient toutes tes données Trakt sans avoir besoin de Trakt VIP"
+  },
+  "notFound": {
+    "title": "Perdu dans le générique ?",
+    "description": "La scène que tu cherches a été coupée au montage. Retournons au film principal.",
+    "backToDashboard": "Retour à l'accueil",
+    "errorCode": "Code erreur : SCENE_MANQUANTE"
   }
 }
