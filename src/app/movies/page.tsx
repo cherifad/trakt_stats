@@ -48,25 +48,25 @@ export default function MoviesPage() {
     }));
 
   return (
-    <div className="min-h-screen p-4 md:p-8 space-y-8">
+    <div className="min-h-screen p-3 sm:p-4 md:p-6 lg:p-8 space-y-4 sm:space-y-6 md:space-y-8">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-0">
         <div>
           <Link
             href="/"
-            className="text-sm text-blue-500 hover:underline mb-2 block"
+            className="text-xs sm:text-sm text-blue-500 hover:underline mb-1 sm:mb-2 block"
           >
             ← {t("movies.backToDashboard")}
           </Link>
-          <h1 className="text-3xl font-bold flex items-center gap-2">
-            <Film className="h-8 w-8" />
+          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-2">
+            <Film className="h-6 w-6 sm:h-8 sm:w-8" />
             {t("movies.title")}
           </h1>
         </div>
       </div>
 
       {/* Stats Overview */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+      <div className="grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-4">
         <StatCard
           title={t("movies.totalMovies")}
           value={formatNumber(movies.stats.plays.total)}
@@ -98,8 +98,8 @@ export default function MoviesPage() {
 
       {/* Top 10 Movies */}
       <div>
-        <h2 className="text-2xl font-bold mb-4">{t("movies.yourTop10")}</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-10 gap-4">
+        <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">{t("movies.yourTop10")}</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-10 gap-3 sm:gap-4">
           {Object.entries(movies.users_top_10).map(([id, movie], index) => (
             <MediaCard
               key={id}
@@ -113,8 +113,8 @@ export default function MoviesPage() {
 
       {/* Highest Rated */}
       <div>
-        <h2 className="text-2xl font-bold mb-4">{t("movies.highestRated")}</h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-10 gap-4">
+        <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">{t("movies.highestRated")}</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-10 gap-3 sm:gap-4">
           {Object.entries(movies.highest_rated).map(([id, movie]) => (
             <MediaCard key={id} poster={movie.poster} rating={movie.rating} />
           ))}
@@ -122,7 +122,7 @@ export default function MoviesPage() {
       </div>
 
       {/* Charts Section */}
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
         <BarChart
           data={yearData}
           title={t("movies.moviesByYear")}
@@ -135,7 +135,7 @@ export default function MoviesPage() {
         />
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid md:grid-cols-2 gap-4 sm:gap-6">
         <BarChart data={dayData} title={t("movies.moviesByDay")} maxItems={7} />
         <BarChart
           data={hourData.filter((h) => h.value > 0)}
@@ -165,11 +165,11 @@ export default function MoviesPage() {
             <CardTitle>{t("movies.ratingDistribution")}</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4">
               {Object.entries(movies.all_ratings).map(([rating, count]) => (
-                <div key={rating} className="text-center p-4 border rounded">
-                  <p className="text-3xl font-bold">{count}</p>
-                  <p className="text-sm text-muted-foreground">
+                <div key={rating} className="text-center p-3 sm:p-4 border rounded">unded">
+                  <p className="text-2xl sm:text-3xl font-bold">{count}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">
                     {rating} {t("movies.stars")}
                   </p>
                 </div>
