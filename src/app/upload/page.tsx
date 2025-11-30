@@ -16,7 +16,7 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { hasUploadedData } from "@/lib/data";
+import { hasUploadedData, getStatsData } from "@/lib/data";
 import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import { useTranslations } from "@/hooks/useTranslations";
 import { useLocale } from "@/hooks/useLocale";
@@ -38,10 +38,15 @@ export default function UploadPage() {
   const [progress, setProgress] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
   const [hasExistingData, setHasExistingData] = useState(false);
+  const [username, setUsername] = useState<string | null>(null);
   const router = useRouter();
 
   useEffect(() => {
     setHasExistingData(hasUploadedData());
+    const data = getStatsData();
+    if (data) {
+      setUsername(data.username);
+    }
   }, []);
 
   const handleClearData = () => {
@@ -309,7 +314,9 @@ export default function UploadPage() {
                 <div className="flex items-center gap-3">
                   <CheckCircle className="w-5 h-5 text-green-500" />
                   <span className="text-sm">
-                    {t("upload.dataAlreadyUploaded")}
+                    {t("upload.dataAlreadyUploaded", {
+                      username: username || "",
+                    })}
                   </span>
                 </div>
                 <motion.button
