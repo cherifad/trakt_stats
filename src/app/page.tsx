@@ -51,16 +51,16 @@ export default function Home() {
   const traktShows = Object.entries(data.trakt.most_watched_shows).slice(0, 5);
 
   return (
-    <div className="min-h-screen p-4 md:p-8 space-y-8">
+    <div className="min-h-screen p-3 sm:p-4 md:p-6 lg:p-8 space-y-4 sm:space-y-6 md:space-y-8">
       {/* Hero Header with Profile */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative overflow-hidden rounded-3xl"
+        className="relative overflow-hidden rounded-2xl sm:rounded-3xl"
       >
         <div className="absolute inset-0 bg-gradient-to-r from-purple-600 via-pink-500 to-blue-600 animate-gradient" />
-        <div className="relative glass p-8 md:p-12 flex items-center justify-between gap-6 flex-wrap">
-          <div className="flex items-center gap-6">
+        <div className="relative glass p-4 sm:p-6 md:p-8 lg:p-12 flex flex-col sm:flex-row items-center sm:justify-between gap-4 sm:gap-6">
+          <div className="flex items-center gap-3 sm:gap-4 md:gap-6">
             <motion.div
               whileHover={{ scale: 1.1, rotate: 5 }}
               transition={{ type: "spring", stiffness: 300 }}
@@ -68,41 +68,41 @@ export default function Home() {
               <Image
                 src={data.pfp}
                 alt={data.username}
-                width={96}
-                height={96}
-                className="rounded-full ring-4 ring-white/20 shadow-2xl"
+                width={64}
+                height={64}
+                className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 rounded-full ring-2 sm:ring-4 ring-white/20 shadow-2xl"
               />
             </motion.div>
             <div className="text-white drop-shadow-lg">
-              <h1 className="text-4xl font-bold mb-2 text-shadow">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-1 sm:mb-2 text-shadow">
                 {data.username}
               </h1>
-              <p className="text-lg font-medium flex items-center gap-2">
-                <TrendingUp className="w-5 h-5" />
+              <p className="text-sm sm:text-base md:text-lg font-medium flex items-center gap-1 sm:gap-2">
+                <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5" />
                 {t("dashboard.title")}
               </p>
             </div>
           </div>
-          <div className="flex gap-4">
-            <Link href="/wrapped">
+          <div className="flex flex-col sm:flex-row gap-2 sm:gap-3 md:gap-4 w-full sm:w-auto">
+            <Link href="/wrapped" className="w-full sm:w-auto">
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-white/30 backdrop-blur-md hover:bg-white/40 px-8 py-4 rounded-2xl transition-all cursor-pointer flex items-center gap-3 shadow-lg border border-white/30"
+                className="bg-white/30 backdrop-blur-md hover:bg-white/40 px-4 sm:px-6 md:px-8 py-3 sm:py-4 rounded-xl sm:rounded-2xl transition-all cursor-pointer flex items-center justify-center gap-2 sm:gap-3 shadow-lg border border-white/30"
               >
-                <Sparkles className="w-6 h-6 text-yellow-400 animate-pulse drop-shadow-md" />
-                <span className="font-bold text-white text-lg drop-shadow-md">
+                <Sparkles className="w-5 h-5 sm:w-6 sm:h-6 text-yellow-400 animate-pulse drop-shadow-md" />
+                <span className="font-bold text-white text-base sm:text-lg drop-shadow-md">
                   {t("dashboard.wrappedCta")}
                 </span>
               </motion.div>
             </Link>
-            <Link href="/wrapped?summary=true">
+            <Link href="/wrapped?summary=true" className="w-full sm:w-auto">
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-white/20 backdrop-blur-md hover:bg-white/30 px-6 py-4 rounded-2xl transition-all cursor-pointer flex items-center gap-3 shadow-lg border border-white/20"
+                className="bg-white/20 backdrop-blur-md hover:bg-white/30 px-4 sm:px-6 py-3 sm:py-4 rounded-xl sm:rounded-2xl transition-all cursor-pointer flex items-center justify-center gap-2 sm:gap-3 shadow-lg border border-white/20"
               >
-                <span className="font-semibold text-white drop-shadow-md">
+                <span className="font-semibold text-white text-sm sm:text-base drop-shadow-md">
                   {t("dashboard.shareWrapped")}
                 </span>
               </motion.div>
@@ -113,10 +113,10 @@ export default function Home() {
 
       {/* All Time Stats - Bento Grid */}
       <motion.div variants={container} initial="hidden" animate="show">
-        <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-purple-700 to-pink-700 bg-clip-text text-transparent">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-purple-700 to-pink-700 bg-clip-text text-transparent">
           {t("dashboard.allTimeStats")}
         </h2>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+        <div className="grid gap-3 sm:gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6">
           {[
             {
               title: t("dashboard.totalPlays"),
@@ -175,11 +175,11 @@ export default function Home() {
         <Card className="glass hover-lift overflow-hidden border-white/10 relative">
           <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 pointer-events-none" />
           <CardHeader className="relative">
-            <CardTitle className="text-2xl">
+            <CardTitle className="text-lg sm:text-xl md:text-2xl">
               {t("dashboard.firstPlay")}
             </CardTitle>
           </CardHeader>
-          <CardContent className="flex items-center gap-6 relative">
+          <CardContent className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 relative">
             {data.first_play.movie_logo && (
               <motion.div
                 whileHover={{ scale: 1.05 }}
@@ -190,15 +190,15 @@ export default function Home() {
                   alt={data.first_play.movie}
                   width={200}
                   height={120}
-                  className="rounded-lg object-contain shadow-lg"
+                  className="rounded-lg object-contain shadow-lg w-auto h-16 sm:h-24 md:h-28"
                 />
               </motion.div>
             )}
-            <div>
-              <h3 className="text-3xl font-bold mb-2">
+            <div className="text-center sm:text-left">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-1 sm:mb-2">
                 {data.first_play.movie}
               </h3>
-              <p className="text-muted-foreground text-lg">
+              <p className="text-muted-foreground text-sm sm:text-base md:text-lg">
                 {data.first_play.date} at {data.first_play.time}
               </p>
             </div>
@@ -211,33 +211,33 @@ export default function Home() {
         variants={container}
         initial="hidden"
         animate="show"
-        className="grid md:grid-cols-2 gap-6"
+        className="grid md:grid-cols-2 gap-4 sm:gap-6"
       >
         <motion.div variants={item}>
           <Link href="/tv" className="block">
             <Card className="glass overflow-hidden border-white/10 group hover-lift cursor-pointer relative">
               <div className="absolute inset-0 bg-gradient-to-br from-blue-500/0 to-blue-500/10 group-hover:from-blue-500/10 group-hover:to-blue-500/20 transition-all pointer-events-none" />
               <CardHeader className="flex flex-row items-center justify-between relative">
-                <CardTitle className="text-2xl">
+                <CardTitle className="text-lg sm:text-xl md:text-2xl">
                   📺 {t("dashboard.tvShows")}
                 </CardTitle>
-                <Tv className="h-8 w-8 text-blue-500 group-hover:scale-110 transition-transform" />
+                <Tv className="h-6 w-6 sm:h-8 sm:w-8 text-blue-500 group-hover:scale-110 transition-transform" />
               </CardHeader>
               <CardContent className="space-y-4 relative">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="glass p-4 rounded-lg">
-                    <p className="text-sm text-muted-foreground mb-1">
+                <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                  <div className="glass p-3 sm:p-4 rounded-lg">
+                    <p className="text-xs sm:text-sm text-muted-foreground mb-1">
                       {t("dashboard.totalHours")}
                     </p>
-                    <p className="text-3xl font-bold bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">
+                    <p className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">
                       {formatNumber(data.tv.stats.hours.total)}
                     </p>
                   </div>
-                  <div className="glass p-4 rounded-lg">
-                    <p className="text-sm text-muted-foreground mb-1">
+                  <div className="glass p-3 sm:p-4 rounded-lg">
+                    <p className="text-xs sm:text-sm text-muted-foreground mb-1">
                       {t("dashboard.episodes")}
                     </p>
-                    <p className="text-3xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+                    <p className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
                       {formatNumber(data.tv.stats.plays.total)}
                     </p>
                   </div>
@@ -269,26 +269,26 @@ export default function Home() {
             <Card className="glass overflow-hidden border-white/10 group hover-lift cursor-pointer relative">
               <div className="absolute inset-0 bg-gradient-to-br from-purple-500/0 to-purple-500/10 group-hover:from-purple-500/10 group-hover:to-purple-500/20 transition-all pointer-events-none" />
               <CardHeader className="flex flex-row items-center justify-between relative">
-                <CardTitle className="text-2xl">
+                <CardTitle className="text-lg sm:text-xl md:text-2xl">
                   🎬 {t("dashboard.movies")}
                 </CardTitle>
-                <Film className="h-8 w-8 text-purple-500 group-hover:scale-110 transition-transform" />
+                <Film className="h-6 w-6 sm:h-8 sm:w-8 text-purple-500 group-hover:scale-110 transition-transform" />
               </CardHeader>
               <CardContent className="space-y-4 relative">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="glass p-4 rounded-lg">
-                    <p className="text-sm text-muted-foreground mb-1">
+                <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                  <div className="glass p-3 sm:p-4 rounded-lg">
+                    <p className="text-xs sm:text-sm text-muted-foreground mb-1">
                       {t("dashboard.totalHours")}
                     </p>
-                    <p className="text-3xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
+                    <p className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-purple-500 to-pink-500 bg-clip-text text-transparent">
                       {formatNumber(data.movies.stats.hours.total)}
                     </p>
                   </div>
-                  <div className="glass p-4 rounded-lg">
-                    <p className="text-sm text-muted-foreground mb-1">
+                  <div className="glass p-3 sm:p-4 rounded-lg">
+                    <p className="text-xs sm:text-sm text-muted-foreground mb-1">
                       {t("dashboard.movies")}
                     </p>
-                    <p className="text-3xl font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
+                    <p className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
                       {formatNumber(data.movies.stats.plays.total)}
                     </p>
                   </div>
@@ -321,12 +321,12 @@ export default function Home() {
         variants={container}
         initial="hidden"
         animate="show"
-        className="grid md:grid-cols-2 gap-6"
+        className="grid md:grid-cols-2 gap-4 sm:gap-6"
       >
         <motion.div variants={item}>
           <Card className="glass border-white/10">
             <CardHeader>
-              <CardTitle className="text-xl">
+              <CardTitle className="text-base sm:text-lg md:text-xl">
                 {t("dashboard.traktMostWatchedMovies")}
               </CardTitle>
             </CardHeader>
@@ -336,22 +336,27 @@ export default function Home() {
                   <motion.div
                     key={rank}
                     whileHover={{ x: 4 }}
-                    className="flex items-center justify-between p-3 rounded-lg hover:bg-white/5 transition-colors"
+                    className="flex items-center justify-between p-2 sm:p-3 rounded-lg hover:bg-white/5 transition-colors"
                   >
-                    <div className="flex items-center gap-3">
-                      <span className="text-2xl font-bold text-primary w-8">
+                    <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+                      <span className="text-lg sm:text-xl md:text-2xl font-bold text-primary w-6 sm:w-8 flex-shrink-0">
                         {rank}
                       </span>
-                      <div>
-                        <p className="font-semibold">{movie.title}</p>
-                        <p className="text-sm text-muted-foreground">
+                      <div className="min-w-0 flex-1">
+                        <p className="font-semibold text-sm sm:text-base truncate">
+                          {movie.title}
+                        </p>
+                        <p className="text-xs sm:text-sm text-muted-foreground">
                           {movie.play_count}
                         </p>
                       </div>
                     </div>
                     {movie.watched && (
-                      <span className="text-green-500 text-sm font-semibold">
-                        ✓ {t("dashboard.watched")}
+                      <span className="text-green-500 text-xs sm:text-sm font-semibold flex-shrink-0 ml-2">
+                        ✓{" "}
+                        <span className="hidden sm:inline">
+                          {t("dashboard.watched")}
+                        </span>
                       </span>
                     )}
                   </motion.div>
@@ -364,7 +369,7 @@ export default function Home() {
         <motion.div variants={item}>
           <Card className="glass border-white/10">
             <CardHeader>
-              <CardTitle className="text-xl">
+              <CardTitle className="text-base sm:text-lg md:text-xl">
                 {t("dashboard.traktMostWatchedShows")}
               </CardTitle>
             </CardHeader>
@@ -374,22 +379,27 @@ export default function Home() {
                   <motion.div
                     key={rank}
                     whileHover={{ x: 4 }}
-                    className="flex items-center justify-between p-3 rounded-lg hover:bg-white/5 transition-colors"
+                    className="flex items-center justify-between p-2 sm:p-3 rounded-lg hover:bg-white/5 transition-colors"
                   >
-                    <div className="flex items-center gap-3">
-                      <span className="text-2xl font-bold text-primary w-8">
+                    <div className="flex items-center gap-2 sm:gap-3 min-w-0 flex-1">
+                      <span className="text-lg sm:text-xl md:text-2xl font-bold text-primary w-6 sm:w-8 flex-shrink-0">
                         {rank}
                       </span>
-                      <div>
-                        <p className="font-semibold">{show.title}</p>
-                        <p className="text-sm text-muted-foreground">
+                      <div className="min-w-0 flex-1">
+                        <p className="font-semibold text-sm sm:text-base truncate">
+                          {show.title}
+                        </p>
+                        <p className="text-xs sm:text-sm text-muted-foreground">
                           {show.play_count}
                         </p>
                       </div>
                     </div>
                     {show.watched && (
-                      <span className="text-green-500 text-sm font-semibold">
-                        ✓ {t("dashboard.watched")}
+                      <span className="text-green-500 text-xs sm:text-sm font-semibold flex-shrink-0 ml-2">
+                        ✓{" "}
+                        <span className="hidden sm:inline">
+                          {t("dashboard.watched")}
+                        </span>
                       </span>
                     )}
                   </motion.div>
@@ -405,16 +415,16 @@ export default function Home() {
         variants={container}
         initial="hidden"
         animate="show"
-        className="grid md:grid-cols-2 gap-6"
+        className="grid md:grid-cols-2 gap-4 sm:gap-6"
       >
         <motion.div variants={item}>
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold">
+          <div className="flex justify-between items-center mb-4 sm:mb-6">
+            <h2 className="text-lg sm:text-xl md:text-2xl font-bold">
               {t("dashboard.yourTopTvShows")}
             </h2>
             <Link
               href="/tv"
-              className="text-primary hover:underline font-medium flex items-center gap-1 group text-sm whitespace-nowrap"
+              className="text-primary hover:underline font-medium flex items-center gap-1 group text-xs sm:text-sm whitespace-nowrap"
             >
               {t("dashboard.viewAll")}
               <motion.span initial={{ x: 0 }} whileHover={{ x: 4 }}>
@@ -438,13 +448,13 @@ export default function Home() {
         </motion.div>
 
         <motion.div variants={item}>
-          <div className="flex justify-between items-center mb-6">
-            <h2 className="text-2xl font-bold">
+          <div className="flex justify-between items-center mb-4 sm:mb-6">
+            <h2 className="text-lg sm:text-xl md:text-2xl font-bold">
               {t("dashboard.yourTopMovies")}
             </h2>
             <Link
               href="/movies"
-              className="text-primary hover:underline font-medium flex items-center gap-1 group text-sm whitespace-nowrap"
+              className="text-primary hover:underline font-medium flex items-center gap-1 group text-xs sm:text-sm whitespace-nowrap"
             >
               {t("dashboard.viewAll")}
               <motion.span initial={{ x: 0 }} whileHover={{ x: 4 }}>

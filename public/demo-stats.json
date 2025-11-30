@@ -1,0 +1,758 @@
+{
+  "username": "DemoUser",
+  "pfp": "https://secure.gravatar.com/avatar/demo?s=200",
+  "all_time_stats": {
+    "plays": 15847,
+    "hours": 8523,
+    "collected": 4856,
+    "ratings": 2432,
+    "lists": 45,
+    "comments": 389
+  },
+  "first_play": {
+    "movie": "Inception",
+    "movie_logo": "https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.png",
+    "date": "2015-06-15",
+    "time": "20:30"
+  },
+  "movies": {
+    "stats": {
+      "plays": {
+        "total": 5245,
+        "per_day": 1.45,
+        "per_month": 43.7,
+        "per_year": 524.5
+      },
+      "hours": {
+        "total": 10490,
+        "per_day": 2.9,
+        "per_month": 87.4,
+        "per_year": 1049.0
+      }
+    },
+    "users_top_10": {
+      "550": {
+        "title": "Fight Club",
+        "poster": "https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg",
+        "runtime": "139 min"
+      },
+      "155": {
+        "title": "The Dark Knight",
+        "poster": "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
+        "runtime": "152 min"
+      },
+      "13": {
+        "title": "Forrest Gump",
+        "poster": "https://image.tmdb.org/t/p/w500/arw2vcBveWOVZr6pxd9XTd1TdQa.jpg",
+        "runtime": "142 min"
+      },
+      "680": {
+        "title": "Pulp Fiction",
+        "poster": "https://image.tmdb.org/t/p/w500/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg",
+        "runtime": "154 min"
+      },
+      "27205": {
+        "title": "Inception",
+        "poster": "https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg",
+        "runtime": "148 min"
+      },
+      "278": {
+        "title": "The Shawshank Redemption",
+        "poster": "https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg",
+        "runtime": "142 min"
+      },
+      "424": {
+        "title": "Schindler's List",
+        "poster": "https://image.tmdb.org/t/p/w500/sF1U4EUQS8YHUYjNl3pMGNIQyr0.jpg",
+        "runtime": "195 min"
+      },
+      "497": {
+        "title": "The Green Mile",
+        "poster": "https://image.tmdb.org/t/p/w500/velWPhVMQeQKcxggNEU8YmIo52R.jpg",
+        "runtime": "189 min"
+      },
+      "389": {
+        "title": "12 Angry Men",
+        "poster": "https://image.tmdb.org/t/p/w500/ppd84D2i9W8jXmsyInGyihiSyqz.jpg",
+        "runtime": "96 min"
+      },
+      "19404": {
+        "title": "Dilwale Dulhania Le Jayenge",
+        "poster": "https://image.tmdb.org/t/p/w500/2CAL2433ZeIihfX1Hb2139CX0pW.jpg",
+        "runtime": "189 min"
+      }
+    },
+    "highest_rated": {
+      "550": {
+        "poster": "https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg",
+        "rating": 10
+      },
+      "155": {
+        "poster": "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
+        "rating": 10
+      },
+      "278": {
+        "poster": "https://image.tmdb.org/t/p/w500/q6y0Go1tsGEsmtFryDOJo3dEmqu.jpg",
+        "rating": 10
+      },
+      "680": {
+        "poster": "https://image.tmdb.org/t/p/w500/d5iIlFn5s0ImszYzBPb8JPIfbXD.jpg",
+        "rating": 9
+      },
+      "27205": {
+        "poster": "https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg",
+        "rating": 9
+      },
+      "424": {
+        "poster": "https://image.tmdb.org/t/p/w500/sF1U4EUQS8YHUYjNl3pMGNIQyr0.jpg",
+        "rating": 9
+      },
+      "13": {
+        "poster": "https://image.tmdb.org/t/p/w500/arw2vcBveWOVZr6pxd9XTd1TdQa.jpg",
+        "rating": 9
+      },
+      "497": {
+        "poster": "https://image.tmdb.org/t/p/w500/velWPhVMQeQKcxggNEU8YmIo52R.jpg",
+        "rating": 8
+      },
+      "19404": {
+        "poster": "https://image.tmdb.org/t/p/w500/2CAL2433ZeIihfX1Hb2139CX0pW.jpg",
+        "rating": 8
+      },
+      "389": {
+        "poster": "https://image.tmdb.org/t/p/w500/ppd84D2i9W8jXmsyInGyihiSyqz.jpg",
+        "rating": 8
+      }
+    },
+    "plays": {
+      "by_year": {
+        "2018": 145,
+        "2019": 323,
+        "2020": 456,
+        "2021": 398,
+        "2022": 467,
+        "2023": 534,
+        "2024": 689,
+        "2025": 850
+      },
+      "by_month": {
+        "January": 389,
+        "February": 402,
+        "March": 415,
+        "April": 398,
+        "May": 434,
+        "June": 427,
+        "July": 456,
+        "August": 443,
+        "September": 398,
+        "October": 387,
+        "November": 363,
+        "December": 333
+      },
+      "by_day_of_week": {
+        "Monday": 656,
+        "Tuesday": 643,
+        "Wednesday": 667,
+        "Thursday": 689,
+        "Friday": 834,
+        "Saturday": 898,
+        "Sunday": 858
+      },
+      "by_hour": {
+        "0": 123,
+        "1": 82,
+        "2": 48,
+        "3": 25,
+        "4": 13,
+        "5": 27,
+        "6": 45,
+        "7": 88,
+        "8": 145,
+        "9": 167,
+        "10": 189,
+        "11": 192,
+        "12": 178,
+        "13": 185,
+        "14": 298,
+        "15": 312,
+        "16": 334,
+        "17": 345,
+        "18": 467,
+        "19": 589,
+        "20": 698,
+        "21": 576,
+        "22": 345,
+        "23": 167
+      }
+    },
+    "by_genre": {
+      "Action": 1234,
+      "Drama": 1456,
+      "Comedy": 889,
+      "Thriller": 767,
+      "Science Fiction": 645,
+      "Crime": 534,
+      "Romance": 498,
+      "Horror": 487,
+      "Adventure": 412,
+      "Fantasy": 389
+    },
+    "by_country": {
+      "United States of America": 2678,
+      "United Kingdom": 1234,
+      "France": 823,
+      "Japan": 698,
+      "South Korea": 587,
+      "Germany": 476,
+      "Italy": 365,
+      "Spain": 254,
+      "Canada": 143,
+      "Australia": 132
+    },
+    "by_released_year": {
+      "1990": 123,
+      "1995": 234,
+      "2000": 345,
+      "2005": 467,
+      "2010": 589,
+      "2015": 712,
+      "2020": 845,
+      "2021": 834,
+      "2022": 823,
+      "2023": 798,
+      "2024": 776,
+      "2025": 612
+    },
+    "all_ratings": {
+      "1": 12,
+      "2": 25,
+      "3": 42,
+      "4": 83,
+      "5": 145,
+      "6": 267,
+      "7": 489,
+      "8": 812,
+      "9": 698,
+      "10": 476
+    },
+    "list_progress": {
+      "imdb_top_250": {
+        "watched": 248,
+        "total": 250
+      },
+      "oscars_best_picture": {
+        "watched": 92,
+        "total": 96
+      }
+    },
+    "plays_current_year": {
+      "by_year": {
+        "2025": 850
+      },
+      "by_month": {
+        "January": 65,
+        "February": 72,
+        "March": 85,
+        "April": 78,
+        "May": 92,
+        "June": 88,
+        "July": 95,
+        "August": 105,
+        "September": 82,
+        "October": 75,
+        "November": 13,
+        "December": 0
+      },
+      "by_day_of_week": {
+        "Monday": 115,
+        "Tuesday": 104,
+        "Wednesday": 126,
+        "Thursday": 115,
+        "Friday": 147,
+        "Saturday": 134,
+        "Sunday": 109
+      },
+      "by_hour": {
+        "0": 21,
+        "1": 10,
+        "2": 5,
+        "3": 2,
+        "4": 1,
+        "5": 3,
+        "6": 11,
+        "7": 22,
+        "8": 33,
+        "9": 42,
+        "10": 31,
+        "11": 42,
+        "12": 31,
+        "13": 42,
+        "14": 53,
+        "15": 42,
+        "16": 31,
+        "17": 42,
+        "18": 63,
+        "19": 84,
+        "20": 92,
+        "21": 71,
+        "22": 45,
+        "23": 27
+      }
+    },
+    "users_top_10_current_year": {
+      "27205": {
+        "title": "Inception",
+        "poster": "https://image.tmdb.org/t/p/w500/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg",
+        "runtime": "148 min"
+      },
+      "550": {
+        "title": "Fight Club",
+        "poster": "https://image.tmdb.org/t/p/w500/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg",
+        "runtime": "139 min"
+      },
+      "155": {
+        "title": "The Dark Knight",
+        "poster": "https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg",
+        "runtime": "152 min"
+      }
+    }
+  },
+  "tv": {
+    "stats": {
+      "plays": {
+        "total": 10602,
+        "per_day": 3.1,
+        "per_month": 93.4,
+        "per_year": 1120.5
+      },
+      "hours": {
+        "total": 8205,
+        "per_day": 2.4,
+        "per_month": 72.1,
+        "per_year": 865.25
+      }
+    },
+    "users_top_10": {
+      "1396": {
+        "title": "Breaking Bad",
+        "poster": "https://image.tmdb.org/t/p/w500/ggFHVNu6YYI5L9pCfOacjizRGt.jpg",
+        "runtime": "47m"
+      },
+      "1399": {
+        "title": "Game of Thrones",
+        "poster": "https://image.tmdb.org/t/p/w500/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg",
+        "runtime": "57m"
+      },
+      "60625": {
+        "title": "Rick and Morty",
+        "poster": "https://image.tmdb.org/t/p/w500/gdIrmf2DdY5mgN6ycVP0XlzKzbE.jpg",
+        "runtime": "23m"
+      },
+      "1402": {
+        "title": "The Walking Dead",
+        "poster": "https://image.tmdb.org/t/p/w500/xf9wuDcqlUPWABZNeDKPbZUjWx0.jpg",
+        "runtime": "42m"
+      },
+      "1418": {
+        "title": "The Big Bang Theory",
+        "poster": "https://image.tmdb.org/t/p/w500/ooBGRQBdbGzBxAVfExiO8r7kloA.jpg",
+        "runtime": "22m"
+      },
+      "66732": {
+        "title": "Stranger Things",
+        "poster": "https://image.tmdb.org/t/p/w500/x2LSRK2Cm7MZhjluni1msVJ3wDF.jpg",
+        "runtime": "51m"
+      },
+      "1412": {
+        "title": "Arrow",
+        "poster": "https://image.tmdb.org/t/p/w500/gKG5QGz5Ngf8fgWpBsWtlg5L2SF.jpg",
+        "runtime": "42m"
+      },
+      "1416": {
+        "title": "Grey's Anatomy",
+        "poster": "https://image.tmdb.org/t/p/w500/clnyhPqj1SNgpAdeSS6a6fwE6Bo.jpg",
+        "runtime": "43m"
+      },
+      "60735": {
+        "title": "The Flash",
+        "poster": "https://image.tmdb.org/t/p/w500/lJA2RCMfsWoskqlQhXPSLFQGXEJ.jpg",
+        "runtime": "44m"
+      },
+      "1408": {
+        "title": "House",
+        "poster": "https://image.tmdb.org/t/p/w500/3mkYLa8Wmg1Dv8mhyAOmEUy6fwB.jpg",
+        "runtime": "44m"
+      }
+    },
+    "highest_rated": {
+      "1396": {
+        "poster": "https://image.tmdb.org/t/p/w500/ggFHVNu6YYI5L9pCfOacjizRGt.jpg",
+        "rating": 10
+      },
+      "1399": {
+        "poster": "https://image.tmdb.org/t/p/w500/1XS1oqL89opfnbLl8WnZY1O1uJx.jpg",
+        "rating": 9
+      },
+      "60625": {
+        "poster": "https://image.tmdb.org/t/p/w500/gdIrmf2DdY5mgN6ycVP0XlzKzbE.jpg",
+        "rating": 9
+      },
+      "66732": {
+        "poster": "https://image.tmdb.org/t/p/w500/x2LSRK2Cm7MZhjluni1msVJ3wDF.jpg",
+        "rating": 9
+      },
+      "1408": {
+        "poster": "https://image.tmdb.org/t/p/w500/3mkYLa8Wmg1Dv8mhyAOmEUy6fwB.jpg",
+        "rating": 8
+      },
+      "1412": {
+        "poster": "https://image.tmdb.org/t/p/w500/gKG5QGz5Ngf8fgWpBsWtlg5L2SF.jpg",
+        "rating": 8
+      },
+      "1418": {
+        "poster": "https://image.tmdb.org/t/p/w500/ooBGRQBdbGzBxAVfExiO8r7kloA.jpg",
+        "rating": 8
+      },
+      "1402": {
+        "poster": "https://image.tmdb.org/t/p/w500/xf9wuDcqlUPWABZNeDKPbZUjWx0.jpg",
+        "rating": 7
+      },
+      "60735": {
+        "poster": "https://image.tmdb.org/t/p/w500/lJA2RCMfsWoskqlQhXPSLFQGXEJ.jpg",
+        "rating": 7
+      },
+      "1416": {
+        "poster": "https://image.tmdb.org/t/p/w500/clnyhPqj1SNgpAdeSS6a6fwE6Bo.jpg",
+        "rating": 7
+      }
+    },
+    "plays": {
+      "by_year": {
+        "2018": 367,
+        "2019": 645,
+        "2020": 998,
+        "2021": 1234,
+        "2022": 1201,
+        "2023": 1589,
+        "2024": 2012,
+        "2025": 2500
+      },
+      "by_month": {
+        "January": 812,
+        "February": 834,
+        "March": 845,
+        "April": 823,
+        "May": 856,
+        "June": 867,
+        "July": 989,
+        "August": 978,
+        "September": 845,
+        "October": 823,
+        "November": 789,
+        "December": 641
+      },
+      "by_day_of_week": {
+        "Monday": 1198,
+        "Tuesday": 1178,
+        "Wednesday": 1189,
+        "Thursday": 1212,
+        "Friday": 1667,
+        "Saturday": 1889,
+        "Sunday": 1669
+      },
+      "by_hour": {
+        "0": 234,
+        "1": 123,
+        "2": 82,
+        "3": 48,
+        "4": 25,
+        "5": 49,
+        "6": 88,
+        "7": 132,
+        "8": 254,
+        "9": 376,
+        "10": 498,
+        "11": 512,
+        "12": 489,
+        "13": 502,
+        "14": 623,
+        "15": 634,
+        "16": 756,
+        "17": 878,
+        "18": 998,
+        "19": 1234,
+        "20": 1467,
+        "21": 1223,
+        "22": 889,
+        "23": 489
+      }
+    },
+    "by_genre": {
+      "Drama": 3567,
+      "Action & Adventure": 2345,
+      "Comedy": 1889,
+      "Sci-Fi & Fantasy": 1234,
+      "Crime": 998,
+      "Mystery": 856,
+      "Thriller": 734,
+      "Animation": 612,
+      "Documentary": 489,
+      "Romance": 367
+    },
+    "by_country": {
+      "United States of America": 6234,
+      "United Kingdom": 2345,
+      "Japan": 1156,
+      "South Korea": 923,
+      "Canada": 698,
+      "Germany": 476,
+      "France": 365,
+      "Spain": 254,
+      "Australia": 143,
+      "Italy": 132
+    },
+    "by_released_year": {
+      "2005": 123,
+      "2008": 245,
+      "2010": 367,
+      "2012": 489,
+      "2014": 612,
+      "2016": 734,
+      "2018": 856,
+      "2020": 978,
+      "2022": 1198,
+      "2023": 1389,
+      "2024": 1567,
+      "2025": 1845
+    },
+    "all_ratings": {
+      "1": 11,
+      "2": 33,
+      "3": 88,
+      "4": 155,
+      "5": 322,
+      "6": 544,
+      "7": 899,
+      "8": 1344,
+      "9": 1122,
+      "10": 877
+    },
+    "list_progress": {
+      "imdb_top_250_tv": {
+        "watched": 216,
+        "total": 250
+      }
+    },
+    "plays_current_year": {
+      "by_year": {
+        "2025": 2500
+      },
+      "by_month": {
+        "January": 210,
+        "February": 195,
+        "March": 230,
+        "April": 215,
+        "May": 240,
+        "June": 225,
+        "July": 260,
+        "August": 280,
+        "September": 245,
+        "October": 230,
+        "November": 170,
+        "December": 0
+      },
+      "by_day_of_week": {
+        "Monday": 358,
+        "Tuesday": 347,
+        "Wednesday": 369,
+        "Thursday": 358,
+        "Friday": 382,
+        "Saturday": 357,
+        "Sunday": 329
+      },
+      "by_hour": {
+        "0": 82,
+        "1": 41,
+        "2": 20,
+        "3": 10,
+        "4": 5,
+        "5": 10,
+        "6": 21,
+        "7": 42,
+        "8": 84,
+        "9": 103,
+        "10": 122,
+        "11": 133,
+        "12": 122,
+        "13": 133,
+        "14": 144,
+        "15": 133,
+        "16": 122,
+        "17": 133,
+        "18": 155,
+        "19": 186,
+        "20": 204,
+        "21": 183,
+        "22": 142,
+        "23": 101
+      }
+    },
+    "users_top_10_current_year": {
+      "1396": {
+        "title": "Breaking Bad",
+        "poster": "https://image.tmdb.org/t/p/w500/ggFHVNu6YYI5L9pCfOacjizRGt.jpg",
+        "runtime": "47m"
+      },
+      "60625": {
+        "title": "Rick and Morty",
+        "poster": "https://image.tmdb.org/t/p/w500/gdIrmf2DdY5mgN6ycVP0XlzKzbE.jpg",
+        "runtime": "23m"
+      },
+      "66732": {
+        "title": "Stranger Things",
+        "poster": "https://image.tmdb.org/t/p/w500/x2LSRK2Cm7MZhjluni1msVJ3wDF.jpg",
+        "runtime": "51m"
+      }
+    }
+  },
+  "actors": [
+    {
+      "name": "Leonardo DiCaprio",
+      "image": "https://image.tmdb.org/t/p/w500/wo2hJpn04vbtmh0B9utCFdsQhxM.jpg",
+      "movies": [
+        "Inception",
+        "The Wolf of Wall Street",
+        "Titanic",
+        "The Revenant"
+      ],
+      "shows": [],
+      "episode": 0
+    },
+    {
+      "name": "Christian Bale",
+      "image": "https://image.tmdb.org/t/p/w500/3qx2QFUbG6t6IlzR0F9k3Z6Yhf7.jpg",
+      "movies": ["The Dark Knight", "American Psycho", "The Prestige"],
+      "shows": [],
+      "episode": 0
+    },
+    {
+      "name": "Bryan Cranston",
+      "image": "https://image.tmdb.org/t/p/w500/7Jahy5LZX2Fo8fGJltMreAI49hC.jpg",
+      "movies": ["Drive"],
+      "shows": ["Breaking Bad"],
+      "episode": 62
+    },
+    {
+      "name": "Tom Hanks",
+      "image": "https://image.tmdb.org/t/p/w500/eKF1sGJRrZJbfBG1KirPt1cfNd3.jpg",
+      "movies": ["Forrest Gump", "The Green Mile", "Cast Away"],
+      "shows": [],
+      "episode": 0
+    },
+    {
+      "name": "Morgan Freeman",
+      "image": "https://image.tmdb.org/t/p/w500/jPsLqiYGSofU4s6BjrxnefMfabb.jpg",
+      "movies": ["The Shawshank Redemption", "The Dark Knight", "Seven"],
+      "shows": [],
+      "episode": 0
+    }
+  ],
+  "directors": [
+    {
+      "name": "Christopher Nolan",
+      "image": "https://image.tmdb.org/t/p/w500/xuAIuYSmsUzKlUMBFGVZaWsY3DZ.jpg",
+      "movies": [
+        "Inception",
+        "The Dark Knight",
+        "Interstellar",
+        "The Prestige"
+      ],
+      "shows": [],
+      "episode": 0
+    },
+    {
+      "name": "Quentin Tarantino",
+      "image": "https://image.tmdb.org/t/p/w500/1gjcpAa99FAOWGnrUvHEXXsRs7o.jpg",
+      "movies": ["Pulp Fiction", "Django Unchained", "Kill Bill"],
+      "shows": [],
+      "episode": 0
+    },
+    {
+      "name": "David Fincher",
+      "image": "https://image.tmdb.org/t/p/w500/tpEczFclQZeKAiCeKZZ0adRvtfz.jpg",
+      "movies": ["Fight Club", "The Social Network", "Se7en"],
+      "shows": [],
+      "episode": 0
+    },
+    {
+      "name": "Steven Spielberg",
+      "image": "https://image.tmdb.org/t/p/w500/tZxcg19YQ3e8fJ0pOs7hjlnmmr6.jpg",
+      "movies": ["Schindler's List", "Saving Private Ryan", "Jurassic Park"],
+      "shows": [],
+      "episode": 0
+    },
+    {
+      "name": "Vince Gilligan",
+      "image": "https://image.tmdb.org/t/p/w500/wSTvJGz7QbJf1HK2Mv1Cev6W9TV.jpg",
+      "movies": [],
+      "shows": ["Breaking Bad"],
+      "episode": 62
+    }
+  ],
+  "trakt": {
+    "most_watched_movies": {
+      "1": {
+        "title": "Avengers: Endgame",
+        "play_count": "12.5M",
+        "watched": true
+      },
+      "2": {
+        "title": "Avengers: Infinity War",
+        "play_count": "11.2M",
+        "watched": true
+      },
+      "3": {
+        "title": "Inception",
+        "play_count": "10.8M",
+        "watched": true
+      },
+      "4": {
+        "title": "The Dark Knight",
+        "play_count": "10.5M",
+        "watched": true
+      },
+      "5": {
+        "title": "Interstellar",
+        "play_count": "9.7M",
+        "watched": false
+      }
+    },
+    "most_watched_shows": {
+      "1": {
+        "title": "Game of Thrones",
+        "play_count": "45.2M",
+        "watched": true
+      },
+      "2": {
+        "title": "Breaking Bad",
+        "play_count": "38.7M",
+        "watched": true
+      },
+      "3": {
+        "title": "The Walking Dead",
+        "play_count": "35.4M",
+        "watched": true
+      },
+      "4": {
+        "title": "Stranger Things",
+        "play_count": "32.9M",
+        "watched": true
+      },
+      "5": {
+        "title": "The Office",
+        "play_count": "30.1M",
+        "watched": false
+      }
+    }
+  }
+}

@@ -25,40 +25,40 @@ export default function DirectorsPage() {
   });
 
   return (
-    <div className="min-h-screen p-4 md:p-8 space-y-8">
+    <div className="min-h-screen p-3 sm:p-4 md:p-6 lg:p-8 space-y-4 sm:space-y-6 md:space-y-8">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-0">
         <div>
           <Link
             href="/"
-            className="text-sm text-blue-500 hover:underline mb-2 block"
+            className="text-xs sm:text-sm text-blue-500 hover:underline mb-1 sm:mb-2 block"
           >
             ← {t("directors.backToDashboard")}
           </Link>
-          <h1 className="text-3xl font-bold flex items-center gap-2">
-            <Clapperboard className="h-8 w-8" />
+          <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-2">
+            <Clapperboard className="h-6 w-6 sm:h-8 sm:w-8" />
             {t("directors.title")}
           </h1>
-          <p className="text-muted-foreground mt-2">
+          <p className="text-muted-foreground mt-1 sm:mt-2 text-xs sm:text-sm md:text-base">
             {t("directors.description")}
           </p>
         </div>
       </div>
 
       {/* Stats */}
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid gap-3 sm:gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
         <Card>
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   {t("directors.totalDirectors")}
                 </p>
-                <p className="text-3xl font-bold">
+                <p className="text-2xl sm:text-3xl font-bold">
                   {formatNumber(directors.length)}
                 </p>
               </div>
-              <Clapperboard className="h-8 w-8 text-muted-foreground" />
+              <Clapperboard className="h-6 w-6 sm:h-8 sm:w-8 text-muted-foreground" />
             </div>
           </CardContent>
         </Card>
@@ -67,13 +67,13 @@ export default function DirectorsPage() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   {t("directors.mostMovies")}
                 </p>
-                <p className="text-3xl font-bold">
+                <p className="text-2xl sm:text-3xl font-bold">
                   {Math.max(...directors.map((d) => d.movies.length))}
                 </p>
-                <p className="text-xs text-muted-foreground mt-1">
+                <p className="text-[10px] sm:text-xs text-muted-foreground mt-1 truncate">
                   {
                     directors.find(
                       (d) =>
@@ -83,7 +83,7 @@ export default function DirectorsPage() {
                   }
                 </p>
               </div>
-              <Film className="h-8 w-8 text-muted-foreground" />
+              <Film className="h-6 w-6 sm:h-8 sm:w-8 text-muted-foreground" />
             </div>
           </CardContent>
         </Card>
@@ -92,13 +92,13 @@ export default function DirectorsPage() {
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-xs sm:text-sm text-muted-foreground">
                   {t("directors.mostEpisodes")}
                 </p>
-                <p className="text-3xl font-bold">
+                <p className="text-2xl sm:text-3xl font-bold">
                   {Math.max(...directors.map((d) => d.episode))}
                 </p>
-                <p className="text-xs text-muted-foreground mt-1">
+                <p className="text-[10px] sm:text-xs text-muted-foreground mt-1 truncate">
                   {
                     directors.find(
                       (d) =>
@@ -108,7 +108,7 @@ export default function DirectorsPage() {
                   }
                 </p>
               </div>
-              <Tv className="h-8 w-8 text-muted-foreground" />
+              <Tv className="h-6 w-6 sm:h-8 sm:w-8 text-muted-foreground" />
             </div>
           </CardContent>
         </Card>
@@ -116,10 +116,10 @@ export default function DirectorsPage() {
 
       {/* Directors List */}
       <div>
-        <h2 className="text-2xl font-bold mb-4">
+        <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">
           {t("directors.allDirectors", { count: directors.length })}
         </h2>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-3 sm:gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {sortedDirectors.map((director) => {
             const totalAppearances =
               director.movies.length + director.shows.length + director.episode;
@@ -162,10 +162,10 @@ export default function DirectorsPage() {
 
       {/* Top by Movies */}
       <div>
-        <h2 className="text-2xl font-bold mb-4">
+        <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">
           {t("directors.topByMovies")}
         </h2>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-3 sm:gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {[...directors]
             .sort((a, b) => b.movies.length - a.movies.length)
             .slice(0, 12)
@@ -188,10 +188,10 @@ export default function DirectorsPage() {
 
       {/* Top by TV Episodes */}
       <div>
-        <h2 className="text-2xl font-bold mb-4">
+        <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">
           {t("directors.topByEpisodes")}
         </h2>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-3 sm:gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {[...directors]
             .filter((d) => d.episode > 0)
             .sort((a, b) => b.episode - a.episode)

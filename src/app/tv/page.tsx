@@ -62,24 +62,24 @@ export default function TVPage() {
     }));
 
   return (
-    <div className="min-h-screen p-4 md:p-8 space-y-8">
+    <div className="min-h-screen p-3 sm:p-4 md:p-6 lg:p-8 space-y-4 sm:space-y-6 md:space-y-8">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="relative overflow-hidden rounded-3xl"
+        className="relative overflow-hidden rounded-2xl sm:rounded-3xl"
       >
         <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 animate-gradient" />
-        <div className="relative glass p-8">
+        <div className="relative glass p-4 sm:p-6 md:p-8">
           <Link
             href="/"
-            className="text-white/80 hover:text-white mb-4 inline-flex items-center gap-2 group"
+            className="text-white/80 hover:text-white mb-2 sm:mb-4 inline-flex items-center gap-2 group text-xs sm:text-sm"
           >
-            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+            <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4 group-hover:-translate-x-1 transition-transform" />
             {t("tv.backToDashboard")}
           </Link>
-          <h1 className="text-4xl font-bold flex items-center gap-3 text-white mt-2">
-            <Tv className="h-10 w-10" />
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold flex items-center gap-2 sm:gap-3 text-white mt-2">
+            <Tv className="h-7 w-7 sm:h-9 sm:w-9 md:h-10 md:w-10" />
             {t("tv.title")}
           </h1>
         </div>
@@ -90,7 +90,7 @@ export default function TVPage() {
         variants={container}
         initial="hidden"
         animate="show"
-        className="grid gap-4 md:grid-cols-2 lg:grid-cols-4"
+        className="grid gap-3 sm:gap-4 grid-cols-2 lg:grid-cols-4"
       >
         <motion.div variants={item}>
           <StatCard
@@ -135,14 +135,14 @@ export default function TVPage() {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
       >
-        <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-blue-700 to-cyan-700 bg-clip-text text-transparent">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-blue-700 to-cyan-700 bg-clip-text text-transparent">
           {t("tv.yourTop10")}
         </h2>
         <motion.div
           variants={container}
           initial="hidden"
           animate="show"
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-10 gap-4"
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-10 gap-3 sm:gap-4"
         >
           {Object.entries(tv.users_top_10).map(([id, show], index) => (
             <motion.div key={id} variants={item}>
@@ -162,14 +162,14 @@ export default function TVPage() {
         animate={{ opacity: 1 }}
         transition={{ delay: 0.3 }}
       >
-        <h2 className="text-3xl font-bold mb-6 bg-gradient-to-r from-yellow-700 to-orange-700 bg-clip-text text-transparent">
+        <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 bg-gradient-to-r from-yellow-700 to-orange-700 bg-clip-text text-transparent">
           {t("tv.highestRated")}
         </h2>
         <motion.div
           variants={container}
           initial="hidden"
           animate="show"
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-10 gap-4"
+          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-10 gap-3 sm:gap-4"
         >
           {Object.entries(tv.highest_rated).map(([id, show]) => (
             <motion.div key={id} variants={item}>
@@ -258,14 +258,14 @@ export default function TVPage() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4">
                 {Object.entries(tv.all_ratings).map(([rating, count]) => (
                   <motion.div
                     key={rating}
                     whileHover={{ scale: 1.05 }}
-                    className="text-center p-6 glass rounded-xl hover-lift border border-white/10"
+                    className="text-center p-4 sm:p-6 glass rounded-xl hover-lift border border-white/10"
                   >
-                    <p className="text-4xl font-bold bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent">
+                    <p className="text-2xl sm:text-3xl md:text-4xl font-bold bg-gradient-to-r from-yellow-500 to-orange-500 bg-clip-text text-transparent">
                       {count}
                     </p>
                     <p className="text-sm text-muted-foreground mt-2">

@@ -312,7 +312,11 @@
     "step2Details": "Tu auras besoin d'un Trakt Client ID et d'une clé API TMDB",
     "step3Title": "Lance le script",
     "step4Title": "Importe le fichier all-time-stats.json généré ici ⬆️",
-    "infoNote": "💡 Le fichier contient toutes tes données Trakt sans avoir besoin de Trakt VIP"
+    "infoNote": "💡 Le fichier contient toutes tes données Trakt sans avoir besoin de Trakt VIP",
+    "demoData": "Données de démo",
+    "loadDemo": "Charger les données de démo",
+    "downloadDemo": "Télécharger le fichier de démo",
+    "demoLoaded": "Données de démo chargées avec succès !"
   },
   "notFound": {
     "title": "Perdu dans le générique ?",

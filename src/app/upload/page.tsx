@@ -10,6 +10,8 @@ import {
   Sparkles,
   Trash2,
   Loader2,
+  Download,
+  PlayCircle,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
@@ -204,6 +206,30 @@ export default function UploadPage() {
     }
   };
 
+  const handleLoadDemo = async () => {
+    try {
+      setUploadStep("processing");
+      setProgress(0);
+      await simulateProgress(0, 50, 300);
+
+      const response = await fetch("/demo-stats.json");
+      const data = await response.text();
+
+      await simulateProgress(50, 100, 300);
+
+      localStorage.setItem("trakt_stats_data", data);
+      setUploadStep("success");
+
+      setTimeout(() => {
+        router.push(`/wrapped?lang=${locale}`);
+      }, 1500);
+    } catch (error) {
+      console.error("Error loading demo data:", error);
+      setErrorMessage(t("upload.errorProcessing"));
+      setUploadStep("error");
+    }
+  };
+
   const simulateProgress = (
     start: number,
     end: number,
@@ -304,45 +330,73 @@ export default function UploadPage() {
           <CardContent className="p-8">
             {/* Zone de drop - seulement visible en mode idle */}
             {uploadStep === "idle" && (
-              <div
-                onDragEnter={handleDragEnter}
-                onDragLeave={handleDragLeave}
-                onDragOver={handleDragOver}
-                onDrop={handleDrop}
-                className={`relative border-2 border-dashed rounded-2xl p-12 transition-all duration-300 ${
-                  isDragging
-                    ? "border-purple-500 bg-purple-500/10 scale-105"
-                    : "border-white/20 hover:border-purple-500/50 hover:bg-purple-500/5"
-                }`}
-              >
-                <input
-                  type="file"
-                  accept=".json"
-                  onChange={handleFileInput}
-                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-                  id="file-upload"
-                />
-
-                <motion.div
-                  animate={{ y: isDragging ? -10 : 0 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                  className="text-center"
+              <>
+                <div
+                  onDragEnter={handleDragEnter}
+                  onDragLeave={handleDragLeave}
+                  onDragOver={handleDragOver}
+                  onDrop={handleDrop}
+                  className={`relative border-2 border-dashed rounded-2xl p-12 transition-all duration-300 ${
+                    isDragging
+                      ? "border-purple-500 bg-purple-500/10 scale-105"
+                      : "border-white/20 hover:border-purple-500/50 hover:bg-purple-500/5"
+                  }`}
                 >
-                  <Upload className="w-16 h-16 mx-auto mb-4 text-purple-500" />
-                  <h3 className="text-xl font-semibold mb-2">
-                    {isDragging
-                      ? t("upload.dropFileHere")
-                      : t("upload.uploadFile")}
+                  <input
+                    type="file"
+                    accept=".json"
+                    onChange={handleFileInput}
+                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                    id="file-upload"
+                  />
+
+                  <motion.div
+                    animate={{ y: isDragging ? -10 : 0 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                    className="text-center"
+                  >
+                    <Upload className="w-16 h-16 mx-auto mb-4 text-purple-500" />
+                    <h3 className="text-xl font-semibold mb-2">
+                      {isDragging
+                        ? t("upload.dropFileHere")
+                        : t("upload.uploadFile")}
+                    </h3>
+                    <p className="text-muted-foreground mb-4">
+                      {t("upload.dragOrClick")}
+                    </p>
+                    <div className="inline-flex items-center gap-2 text-sm text-muted-foreground bg-white/5 px-4 py-2 rounded-lg">
+                      <FileJson className="w-4 h-4" />
+                      {t("upload.acceptedFormat")}
+                    </div>
+                  </motion.div>
+                </div>
+
+                {/* Demo Data Section */}
+                <div className="mt-8 pt-8 border-t border-white/10">
+                  <h3 className="text-lg font-semibold mb-4 text-center">
+                    {t("upload.demoData")}
                   </h3>
-                  <p className="text-muted-foreground mb-4">
-                    {t("upload.dragOrClick")}
-                  </p>
-                  <div className="inline-flex items-center gap-2 text-sm text-muted-foreground bg-white/5 px-4 py-2 rounded-lg">
-                    <FileJson className="w-4 h-4" />
-                    {t("upload.acceptedFormat")}
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={handleLoadDemo}
+                      className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-purple-500/20 hover:bg-purple-500/30 text-purple-400 border border-purple-500/30 transition-colors"
+                    >
+                      <PlayCircle className="w-5 h-5" />
+                      {t("upload.loadDemo")}
+                    </motion.button>
+                    <a
+                      href="/demo-stats.json"
+                      download="demo-stats.json"
+                      className="flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-white/5 hover:bg-white/10 text-white border border-white/10 transition-colors"
+                    >
+                      <Download className="w-5 h-5" />
+                      {t("upload.downloadDemo")}
+                    </a>
                   </div>
-                </motion.div>
-              </div>
+                </div>
+              </>
             )}
 
             {/* Progress UI - visible pendant upload/validation/processing/success */}

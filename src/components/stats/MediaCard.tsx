@@ -32,11 +32,12 @@ export function MediaCard({
     <motion.div
       whileHover={{ y: -8, scale: 1.03 }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
+      className="h-full"
     >
       <Card
-        className={`overflow-hidden glass border-white/10 gap-0 dark:border-white/5 group py-0 ${
-          !hasContent ? "h-full" : ""
-        } ${className || ""}`}
+        className={`overflow-hidden glass border-white/10 gap-0 dark:border-white/5 group py-0 h-full ${
+          className || ""
+        }`}
       >
         <div
           className={`relative w-full overflow-hidden ${
@@ -64,7 +65,7 @@ export function MediaCard({
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
-              className={`absolute top-2 right-2 px-2 py-1 rounded-lg text-xs font-semibold backdrop-blur-md ${
+              className={`absolute top-1 right-1 sm:top-2 sm:right-2 px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-md sm:rounded-lg text-[10px] sm:text-xs font-semibold backdrop-blur-md ${
                 watched
                   ? "bg-green-500/80 text-white"
                   : "bg-gray-500/80 text-white"
@@ -77,24 +78,26 @@ export function MediaCard({
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
-              className="absolute top-2 left-2 bg-yellow-500/90 backdrop-blur-md text-white px-2 py-1 rounded-lg text-xs font-bold flex items-center gap-1"
+              className="absolute top-1 left-1 sm:top-2 sm:left-2 bg-yellow-500/90 backdrop-blur-md text-white px-1.5 py-0.5 sm:px-2 sm:py-1 rounded-md sm:rounded-lg text-[10px] sm:text-xs font-bold flex items-center gap-0.5 sm:gap-1"
             >
               ★ {rating}
             </motion.div>
           )}
         </div>
         {(title || subtitle || runtime) && (
-          <CardContent className="p-3 bg-card/50 dark:bg-card/80 backdrop-blur-sm">
+          <CardContent className="p-2 sm:p-3 bg-card/50 dark:bg-card/80 backdrop-blur-sm">
             {title && (
-              <h3 className="font-semibold text-sm line-clamp-2 group-hover:text-primary transition-colors">
+              <h3 className="font-semibold text-xs sm:text-sm line-clamp-2 group-hover:text-primary transition-colors">
                 {title}
               </h3>
             )}
             {subtitle && (
-              <p className="text-xs text-muted-foreground mt-1">{subtitle}</p>
+              <p className="text-[10px] sm:text-xs text-muted-foreground mt-0.5 sm:mt-1">
+                {subtitle}
+              </p>
             )}
             {runtime && (
-              <p className="text-xs text-muted-foreground mt-1 flex items-center gap-1">
+              <p className="text-[10px] sm:text-xs text-muted-foreground mt-0.5 sm:mt-1 flex items-center gap-0.5 sm:gap-1">
                 <span>⏱️</span> {runtime}
               </p>
             )}
