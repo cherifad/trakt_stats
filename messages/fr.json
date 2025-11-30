@@ -323,5 +323,10 @@
     "description": "La scène que tu cherches a été coupée au montage. Retournons au film principal.",
     "backToDashboard": "Retour à l'accueil",
     "errorCode": "Code erreur : SCENE_MANQUANTE"
+  },
+  "footer": {
+    "madeWithLove": "Fait avec ❤️ par",
+    "viewOnGithub": "Voir sur GitHub",
+    "poweredBy": "Propulsé par"
   }
 }

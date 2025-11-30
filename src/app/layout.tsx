@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Navigation } from "@/components/Navigation";
 import { RequireUpload } from "@/components/RequireUpload";
+import { Footer } from "@/components/Footer";
 import { usePathname } from "next/navigation";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { useEffect } from "react";
@@ -53,6 +54,7 @@ export default function RootLayout({
           <RequireUpload>
             {!isWrappedPage && !isUploadPage && <Navigation />}
             <main>{children}</main>
+            {!isWrappedPage && <Footer />}
           </RequireUpload>
         </ThemeProvider>
       </body>

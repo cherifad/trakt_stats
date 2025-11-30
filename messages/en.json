@@ -323,5 +323,10 @@
     "description": "The scene you're looking for has been cut from the final release. Let's get you back to the main feature.",
     "backToDashboard": "Back to Dashboard",
     "errorCode": "Error Code: SCENE_MISSING"
+  },
+  "footer": {
+    "madeWithLove": "Made with ❤️ by",
+    "viewOnGithub": "View on GitHub",
+    "poweredBy": "Powered by"
   }
 }
