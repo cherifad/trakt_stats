@@ -14,6 +14,7 @@ Visualize and analyze your Trakt viewing statistics with an elegant, interactive
 - 🎭 **Actors & Directors** - Top people with appearances and filmography
 - 🎉 **Annual Wrapped** - Spotify-style animated recap with shareable insights
 - 🌓 **Dark mode** - Automatic theme detection
+- 🧪 **Demo Mode** - Try the app with sample data before uploading your own
 - 🌍 **Multilingual** - French and English support
 - 📱 **PWA** - Install as a mobile/desktop app, works offline
 - 🎨 **Modern UI** - Glass morphism, smooth animations, responsive design
