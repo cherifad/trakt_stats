@@ -167,7 +167,7 @@ export default function MoviesPage() {
           <CardContent>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4">
               {Object.entries(movies.all_ratings).map(([rating, count]) => (
-                <div key={rating} className="text-center p-3 sm:p-4 border rounded">unded">
+                <div key={rating} className="text-center p-3 sm:p-4 border rounded">
                   <p className="text-2xl sm:text-3xl font-bold">{count}</p>
                   <p className="text-xs sm:text-sm text-muted-foreground">
                     {rating} {t("movies.stars")}
