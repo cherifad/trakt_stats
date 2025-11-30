@@ -312,7 +312,11 @@
     "step2Details": "You'll need a Trakt Client ID and TMDB API key",
     "step3Title": "Run the script",
     "step4Title": "Upload the generated all-time-stats.json file here ⬆️",
-    "infoNote": "💡 The file contains all your Trakt data without needing Trakt VIP"
+    "infoNote": "💡 The file contains all your Trakt data without needing Trakt VIP",
+    "demoData": "Demo Data",
+    "loadDemo": "Load Demo Data",
+    "downloadDemo": "Download Demo File",
+    "demoLoaded": "Demo data loaded successfully!"
   },
   "notFound": {
     "title": "Lost in the credits?",
