@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import type { Metadata } from "next";
 import "./globals.css";
@@ -14,18 +14,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const pathname = usePathname();
-  const isWrappedPage = pathname === '/wrapped';
-  const isUploadPage = pathname === '/upload';
+  const isWrappedPage = pathname === "/wrapped";
+  const isUploadPage = pathname === "/upload";
 
   useEffect(() => {
-    if ('serviceWorker' in navigator && process.env.NODE_ENV === 'production') {
+    if ("serviceWorker" in navigator && process.env.NODE_ENV === "production") {
       navigator.serviceWorker
-        .register('/sw.js')
+        .register("/sw.js")
         .then((registration) => {
-          console.log('Service Worker registered:', registration);
+          console.log("Service Worker registered:", registration);
         })
         .catch((error) => {
-          console.log('Service Worker registration failed:', error);
+          console.log("Service Worker registration failed:", error);
         });
     }
   }, []);

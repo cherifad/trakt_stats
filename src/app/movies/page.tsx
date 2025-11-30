@@ -98,7 +98,9 @@ export default function MoviesPage() {
 
       {/* Top 10 Movies */}
       <div>
-        <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">{t("movies.yourTop10")}</h2>
+        <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">
+          {t("movies.yourTop10")}
+        </h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-10 gap-3 sm:gap-4">
           {Object.entries(movies.users_top_10).map(([id, movie], index) => (
             <MediaCard
@@ -113,7 +115,9 @@ export default function MoviesPage() {
 
       {/* Highest Rated */}
       <div>
-        <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">{t("movies.highestRated")}</h2>
+        <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">
+          {t("movies.highestRated")}
+        </h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-10 gap-3 sm:gap-4">
           {Object.entries(movies.highest_rated).map(([id, movie]) => (
             <MediaCard key={id} poster={movie.poster} rating={movie.rating} />
@@ -167,7 +171,10 @@ export default function MoviesPage() {
           <CardContent>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4">
               {Object.entries(movies.all_ratings).map(([rating, count]) => (
-                <div key={rating} className="text-center p-3 sm:p-4 border rounded">
+                <div
+                  key={rating}
+                  className="text-center p-3 sm:p-4 border rounded"
+                >
                   <p className="text-2xl sm:text-3xl font-bold">{count}</p>
                   <p className="text-xs sm:text-sm text-muted-foreground">
                     {rating} {t("movies.stars")}
