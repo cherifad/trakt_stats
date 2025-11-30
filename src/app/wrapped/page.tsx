@@ -18,7 +18,7 @@ export default function WrappedPage() {
   const [currentSlide, setCurrentSlide] = useState(skipToEnd ? 17 : 0);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  const totalSlides = 17;
+  const totalSlides = 18;
 
   const nextSlide = () => {
     if (currentSlide < totalSlides - 1) {
@@ -858,8 +858,8 @@ export default function WrappedPage() {
         )}
       </div>
 
-      {/* Slide Indicators */}
-      <div className="absolute bottom-16 sm:bottom-20 md:bottom-24 left-0 right-0 flex justify-center gap-1.5 sm:gap-2 z-50 wrapped-nav-hidden">
+      {/* Slide Indicators - Hidden on mobile */}
+      <div className="hidden md:flex absolute bottom-16 sm:bottom-20 md:bottom-24 left-0 right-0 justify-center gap-1.5 z-50 wrapped-nav-hidden">
         {Array.from({ length: totalSlides }).map((_, index) => (
           <button
             key={index}
@@ -870,14 +870,23 @@ export default function WrappedPage() {
                 setIsAnimating(false);
               }, 300);
             }}
-            className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-all ${
+            className={`w-2 h-2 rounded-full transition-all ${
               index === currentSlide
-                ? "bg-white w-6 sm:w-8"
+                ? "bg-white w-6"
                 : "bg-white/30 hover:bg-white/50"
             }`}
             aria-label={`Go to slide ${index + 1}`}
           />
         ))}
+      </div>
+
+      {/* Mobile slide counter */}
+      <div className="md:hidden absolute top-4 left-1/2 -translate-x-1/2 z-50 wrapped-nav-hidden">
+        <div className="bg-black/40 backdrop-blur-sm px-3 py-1.5 rounded-full">
+          <span className="text-white text-sm font-medium">
+            {currentSlide + 1} / {totalSlides}
+          </span>
+        </div>
       </div>
 
       {/* Skip Button */}
