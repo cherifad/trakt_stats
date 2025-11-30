@@ -41,8 +41,8 @@ export function Navigation() {
       animate={{ y: 0 }}
       className="glass sticky top-0 z-50 border-b border-white/10"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6 xl:px-8">
+        <div className="flex items-center justify-between h-14 sm:h-16">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -54,16 +54,16 @@ export function Navigation() {
                 whileHover={{ rotate: 360 }}
                 transition={{ duration: 0.5 }}
               >
-                <Film className="h-8 w-8 text-primary" />
+                <Film className="h-6 w-6 sm:h-7 sm:w-7 md:h-8 md:w-8 text-primary" />
               </motion.div>
-              <span className="ml-2 text-xl font-bold bg-linear-to-r from-purple-700 via-purple-500 to-pink-600 bg-clip-text text-transparent drop-shadow-sm">
+              <span className="ml-2 text-base sm:text-lg md:text-xl font-bold bg-linear-to-r from-purple-700 via-purple-500 to-pink-600 bg-clip-text text-transparent drop-shadow-sm">
                 {t("nav.brandName")}
               </span>
             </Link>
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden lg:flex items-center gap-3">
             <div className="flex items-baseline space-x-2">
               {navigation.map((item, index) => {
                 const isActive = pathname === item.href;
@@ -78,7 +78,7 @@ export function Navigation() {
                     <Link
                       href={item.href}
                       className={cn(
-                        "relative px-4 py-2 rounded-lg text-sm font-medium transition-all flex items-center gap-2 group",
+                        "relative px-3 py-2 rounded-lg text-xs xl:text-sm font-medium transition-all flex items-center gap-1.5 xl:gap-2 group",
                         isActive
                           ? "text-primary"
                           : "text-muted-foreground hover:text-foreground"
@@ -95,7 +95,7 @@ export function Navigation() {
                           }}
                         />
                       )}
-                      <Icon className="h-4 w-4 relative z-10 group-hover:scale-110 transition-transform" />
+                      <Icon className="h-3.5 w-3.5 xl:h-4 xl:w-4 relative z-10 group-hover:scale-110 transition-transform" />
                       <span className="relative z-10">{item.name}</span>
                     </Link>
                   </motion.div>
@@ -107,7 +107,7 @@ export function Navigation() {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="flex md:hidden items-center gap-2">
+          <div className="flex lg:hidden items-center gap-2">
             <ThemeToggle />
             <LanguageSwitcher />
             <button
@@ -133,9 +133,9 @@ export function Navigation() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="md:hidden border-t border-white/10 dark:border-white/5 overflow-hidden"
+            className="lg:hidden border-t border-white/10 dark:border-white/5 overflow-hidden bg-background/95 backdrop-blur-md"
           >
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            <div className="px-2 pt-2 pb-3 space-y-1 max-h-[calc(100vh-4rem)] overflow-y-auto">
               {navigation.map((item) => {
                 const isActive = pathname === item.href;
                 const Icon = item.icon;
