@@ -151,6 +151,15 @@ export default function WrappedPage() {
     { day: "", count: 0 }
   );
 
+  const bingeDayShort = bingeDay.day.substring(0, 3);
+  let translatedBingeDay = bingeDay.day;
+  if (bingeDayShort) {
+    const translationKey = `daysLong.${bingeDayShort}`;
+    const translation = t(translationKey);
+    translatedBingeDay =
+      translation === translationKey ? bingeDay.day : translation;
+  }
+
   const totalCountries = new Set([
     ...Object.keys(data.tv.by_country || {}),
     ...Object.keys(data.movies.by_country || {}),
@@ -550,21 +559,21 @@ export default function WrappedPage() {
             {t("wrapped.yourUltimateBingeDay")}
           </p>
           <h1 className="text-7xl md:text-8xl font-bold mb-8 animate-scale-in">
-            {t(`daysLong.${bingeDay.day}`) || bingeDay.day}
+            {translatedBingeDay}
           </h1>
           <p className="text-3xl mb-4 opacity-90">
             {bingeDay.count} {t("wrapped.episodesMovies")}
           </p>
           <p className="text-2xl mt-8 opacity-60">
-            {bingeDay.day === "Mon" || bingeDay.day === "Tue"
+            {bingeDayShort === "Mon" || bingeDayShort === "Tue"
               ? t("wrapped.beatingMondayBlues")
-              : bingeDay.day === "Wed"
+              : bingeDayShort === "Wed"
               ? t("wrapped.humpDay")
-              : bingeDay.day === "Thu"
+              : bingeDayShort === "Thu"
               ? t("wrapped.almostFriday")
-              : bingeDay.day === "Fri"
+              : bingeDayShort === "Fri"
               ? t("wrapped.tgif")
-              : bingeDay.day === "Sat" || bingeDay.day === "Sun"
+              : bingeDayShort === "Sat" || bingeDayShort === "Sun"
               ? t("wrapped.weekendWarrior")
               : t("wrapped.whatADay")}
           </p>

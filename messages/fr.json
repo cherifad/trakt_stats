@@ -284,7 +284,7 @@
     "title": "Trakt Stats",
     "subtitle": "Découvre tes statistiques de visionnage détaillées",
     "backToDashboard": "← Retour à l'accueil",
-    "dataAlreadyUploaded": "Données déjà importées",
+    "dataAlreadyUploaded": "Données déjà importées pour {username}",
     "deleteAndUploadNew": "Supprimer et importer un nouveau fichier",
     "dropFileHere": "Dépose ton fichier ici",
     "uploadFile": "Importe ton fichier all-time-stats.json",
