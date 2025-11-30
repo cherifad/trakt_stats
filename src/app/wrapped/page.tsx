@@ -87,9 +87,15 @@ export default function WrappedPage() {
     return acc;
   }, {} as Record<string, number>);
   const topGenre = Object.entries(topGenres).sort(([, a], [, b]) => b - a)[0];
-  const translatedGenre = topGenre?.[0]
-    ? t(`genres.${topGenre[0]}`)
-    : t("wrapped.defaultGenre");
+
+  let translatedGenre = t("wrapped.defaultGenre");
+  if (topGenre?.[0]) {
+    const genreKey = topGenre[0];
+    const translationKey = `genres.${genreKey}`;
+    const translation = t(translationKey);
+    // If translation returns the key itself, it means translation failed
+    translatedGenre = translation === translationKey ? genreKey : translation;
+  }
 
   const topMovie = Object.entries(
     data.movies.users_top_10_current_year || data.movies.users_top_10
@@ -106,9 +112,16 @@ export default function WrappedPage() {
     },
     { month: "", count: 0 }
   );
-  const translatedMonth = mostActiveMonth.month
-    ? t(`months.${mostActiveMonth.month}`)
-    : mostActiveMonth.month;
+
+  let translatedMonth = mostActiveMonth.month;
+  if (mostActiveMonth.month) {
+    // The data has full month names (January, February...) but translation keys are short (Jan, Feb...)
+    const monthKey = mostActiveMonth.month.substring(0, 3);
+    const translationKey = `months.${monthKey}`;
+    const translation = t(translationKey);
+    translatedMonth =
+      translation === translationKey ? mostActiveMonth.month : translation;
+  }
 
   // Fun calculations
   const nightOwlHours = Object.entries(currentYearTvData.by_hour).reduce(

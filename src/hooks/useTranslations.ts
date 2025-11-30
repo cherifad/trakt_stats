@@ -76,6 +76,17 @@ export function useTranslations() {
       value = value?.[k];
     }
 
+    // Fallback to English if not found
+    if (typeof value !== "string" && messages !== enMessages) {
+      let fallbackValue: any = enMessages;
+      for (const k of keys) {
+        fallbackValue = fallbackValue?.[k];
+      }
+      if (typeof fallbackValue === "string") {
+        value = fallbackValue;
+      }
+    }
+
     if (typeof value !== "string") {
       console.warn(`Translation key not found: ${key}`);
       return key;
